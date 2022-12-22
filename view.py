@@ -1,5 +1,5 @@
 from controller import *
-import emoji
+
 def main():
     lista_jog = []
     print("""
@@ -8,7 +8,7 @@ def main():
     while True:
         print(""" 
     Para começar, por favor selecione uma das seguintes opções:
-        Regras
+        Como jogar
         Jogador
         Jogo
         Dados guardados
@@ -16,7 +16,7 @@ def main():
         """) #colocar opções jogador, jogo, dados guardados, sair
         opcao = input("Opção escolhida 1: ").lower()
 
-        if opcao == "regras":
+        if opcao == "como jogar":
             print("""
             
             """)
@@ -80,6 +80,10 @@ def main():
 
         elif opcao == "dados guardados":
             print("""
+            Menu Dados guardados
+            Por favor selecione uma das seguintes opções:
+                L - Ler ficheiro
+                G- Gravar ficheiro
             """) #colocar L, G
             opcao = input("Opção escolhida 2: ").split()
             if opcao == "L":
@@ -95,10 +99,28 @@ def main():
         elif opcao == "sair":
             print("""
             """) #perguntar se quer sair
-            sair = input("Tem a certeza que quer sair? ").lower()
+            sair = input("""
+            Tem a certeza que quer sair? """).lower()
             if sair == "sim":
-                print(""" \N{loudly crying face}
-                """) #despedida usar este emoji \N{loudly crying face}
+                guardar = print(""" 
+                Deseja guardar os ficheiros antes de sair?
+                """).lower()
+                if guardar == "sim":
+                    print("""
+                    Os seus dados foram guardados.
+                    Esperemos que volte em breve. \N{loudly crying face}
+                    """)
+                elif guardar == "nao" or guardar == "não":
+                    print("""
+                    Os seus ficheiros não foram guardados.
+                    Esperemos que volte em breve. \N{loudly crying face}
+                    """)
+                else:
+                    print("""
+                    A expressão introduzida não tem nada haver com a pergunta, por isso vou guardar os seus dados.
+                    Esperemos que volte em breve. \N{loudly crying face}
+                    """)
+                    
                 break
             elif sair == "não" or sair =="nao":
                 continue
