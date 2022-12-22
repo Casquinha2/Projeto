@@ -20,11 +20,12 @@ def main():
 
         if opcao == "como jogar":
             print("""
-            No jogo n em linha tu poderás definir tanto o tamanho das peças como o da grelha. 
-            O jogo consiste em Jogadas intercaladas entre os diversos jogadores em que tem como
-            objetivo largar peças numa determinada posição da grelha de forma a formar n em linha
-            (em que n será o número de peças em linha necessário para ganhar), ou seja o primeiro a fazer n em linha ganha!
-            Este jogo também contém peças especiais em que também poderás definir o seu tamanho e quantas poderás utilizar durante o jogo.
+            No jogo "n em linha" tu poderás definir tanto o tamanho das peças como o da grelha. 
+            O jogo consiste em jogadas intercaladas entre os diversos jogadores.
+            O objetivo é formar n em linha (em que n é o número de peças em linha necessárias para ganhar), 
+            largando peças numa determinada posição da grelha. 
+            Ou seja, o primeiro a fazer n em linha ganha!
+            Este jogo também contém peças especiais em que poderás definir o tamanho destas e quantas poderás utilizar durante o jogo.
             """)
         elif opcao == "jogador":
             print("""
