@@ -15,7 +15,7 @@ def main():
         Sair
         """)
         opcao = input("""
-    Opção escolhida 1: """).lower()
+    Opção escolhida: """).lower()
 
         if opcao == "como jogar":
             print("""
@@ -37,7 +37,7 @@ def main():
             
             """)
             opcao = input("""
-            Opção escolhida 2:""").split()
+            Opção escolhida:""").split()
 
             if opcao[0] == "RJ":
                 if opcao[1] not in lista_jog:
@@ -85,7 +85,7 @@ def main():
                 Voltar
             """)
             opcao = input("""
-            Opção escolhida 2: """).split()
+            Opção escolhida: """).split()
             if opcao[0] == "IJ":
                 #ter grelhas pré-definidas por nós
                 pass
@@ -111,7 +111,7 @@ def main():
                 G- Gravar ficheiro
             """)
             opcao = input("""
-            Opção escolhida 2: """).split()
+            Opção escolhida: """).split()
             if opcao == "L":
                 pass
             elif opcao == "G":
