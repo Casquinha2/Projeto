@@ -102,7 +102,7 @@ def main():
             sair = input("""
             Tem a certeza que quer sair? """).lower()
             if sair == "sim":
-                guardar = print(""" 
+                guardar = input(""" 
                 Deseja guardar os ficheiros antes de sair?
                 """).lower()
                 if guardar == "sim":
