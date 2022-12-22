@@ -41,7 +41,8 @@ def main():
 
             if opcao[0] == "RJ":
                 if opcao[1] not in lista_jog:
-                    lista_jog.append(adicionar_jogador(opcao[1]))   
+                    jogador = adicionar_jogador(opcao[1])
+                    lista_jog.append(jogador)   
                     print("""
                     Jogador registado com sucesso.""")
                 else:
