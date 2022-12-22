@@ -1,8 +1,4 @@
 from controller import *
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 def main():
     lista_jog = [] #jogadores registrados
     jog_jogo = [] #jogadores em jogo
