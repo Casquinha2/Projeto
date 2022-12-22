@@ -26,7 +26,6 @@ def main():
             (em que n será o número de peças em linha necessário para ganhar), ou seja o primeiro a fazer n em linha ganha!
             Este jogo também contém peças especiais em que também poderás definir o seu tamanho e quantas poderás utilizar durante o jogo.
             """)
-
         elif opcao == "jogador":
             print("""
         Menu Jogador
