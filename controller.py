@@ -17,3 +17,5 @@ def criar_grelha(w, h):
     for j in range(h):
         grelha.append(lista)
     return grelha
+
+

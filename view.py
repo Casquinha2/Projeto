@@ -65,7 +65,7 @@ def main():
                 if lista_jog != "":
                     for i in range(0, len(lista_jog)):
                         print(lista_jog[i])
-                else:
+                elif lista_jog ==[]:
                     print("""
                     Não existem jogadores registados""")
 
@@ -98,6 +98,7 @@ def main():
             """)
             opcao = input("""
             Opção escolhida: """).split()
+
             if opcao[0] == "IJ":
                 if jog_jogo != []:
                     print("""
@@ -139,19 +140,20 @@ def main():
                     elif opcao[5] < opcao[3]:
                         print("""
                 Tamanho de sequência invalido.""")
+                pass
                 #falta a condição das pessas especiais
-                pass 
             elif opcao[0] == "DJ":
-                print(f"""
-                        {opcao[3]} por {opcao[4]}
-                        {opcao[1]}
-                        
-                        {opcao[2]}
-                        """)#falta adicionar tamanho e quantidade de peças especiais.
                 if jog_jogo == []:
                             print("""
                         Não existe jogo em curso.""")
-                pass
+                else:
+                    print(f"""
+                            {opcao[3]} por {opcao[4]}
+                            {jogador1}
+                            
+                            {jogador2}
+                            """)#falta adicionar tamanho e quantidade de peças especiais.
+                    pass
             elif opcao[0] == "V":
                     print(grelha)
                     pass
@@ -170,15 +172,16 @@ def main():
                 Menu Dados guardados
                     Por favor selecione uma das seguintes opções:
                         L - Ler ficheiro
-                        G- Gravar ficheiro
+                        G - Gravar ficheiro
+                        Voltar
                     """)
             opcao = input("""
-                    Opção escolhida: """).split()
+                    Opção escolhida: """)
             if opcao == "L":
                 pass
             elif opcao == "G":
                 pass
-            elif opcao[0] == "Voltar":
+            elif opcao == "Voltar":
                 continue
             else:
                 print("""
@@ -207,8 +210,7 @@ def main():
                         Por isso vamos guardar os seus dados.
                         Esperemos que volte em breve. \N{loudly crying face}
                             """)
-                            
-                break
+                    break
             elif sair == "não" or sair =="nao":
                 continue
             else:
