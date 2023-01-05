@@ -109,30 +109,71 @@ def main():
                     print(f"""
                 O jogador {opcao[2]} não se encontra registrado.""")
                 
-                pass #faltam algumas saidas com insucesso e fazer o jogo em si (mas o jogo é no "else")
+                jogador1 = opcao[1]
+                jogador2 = opcao[2]
+                if opcao[3] == "Pequeno" or opcao[3] == "pequeno":
+                    w = 5
+                    h = 4
+                    n = 3
+                    grelha = criar_grelha(w, h)
+                    for i in range(h):
+                        print(grelha[i])
+                elif opcao[3] == "Médio" or opcao[3] == "médio":
+                    w = 7
+                    h = 6
+                    n = 4
+                    grelha = criar_grelha(w, h)
+                    for i in range(h):
+                        print(grelha[i])
+                elif opcao[3] == "grande" or opcao[3] == "Grande":
+                    w = 11
+                    h = 8
+                    n = 6
+                    grelha = criar_grelha(w, h)
+                    for i in range(h):
+                        print(grelha[i])
+                elif opcao[3] == int:  #depois fica as regras de insucesso tamanho
+                    if opcao[4] < (opcao[3]/2) or opcao[4] > opcao[3]:
+                        print(f"""
+                Dimensões de grelha invalidas.""")
+                    elif opcao[5] < opcao[3]:
+                        print("""
+                Tamanho de sequência invalido.""")
+                #falta a condição das pessas especiais
+                pass 
             elif opcao[0] == "DJ":
+                print(f"""
+                        {opcao[3]} por {opcao[4]}
+                        {opcao[1]}
+                        
+                        {opcao[2]}
+                        """)#falta adicionar tamanho e quantidade de peças especiais.
+                if jog_jogo == []:
+                            print("""
+                        Não existe jogo em curso.""")
                 pass
             elif opcao[0] == "V":
-                pass
+                    print(grelha)
+                    pass
             elif opcao[0] == "CP":
-                pass
+                    pass
             elif opcao[0] == "D":
-                pass
+                    pass
             elif opcao[0] == "Voltar":
                 continue
             else:
                 print("""
-                A expressão introduzida deve estar mal escrita. Por favor tente de novo.""")
+            A expressão introduzida deve estar mal escrita. Por favor tente de novo.""")
 
         elif opcao == "dados guardados":
             print("""
-        Menu Dados guardados
-            Por favor selecione uma das seguintes opções:
-                L - Ler ficheiro
-                G- Gravar ficheiro
-            """)
+                Menu Dados guardados
+                    Por favor selecione uma das seguintes opções:
+                        L - Ler ficheiro
+                        G- Gravar ficheiro
+                    """)
             opcao = input("""
-            Opção escolhida: """).split()
+                    Opção escolhida: """).split()
             if opcao == "L":
                 pass
             elif opcao == "G":
@@ -141,40 +182,40 @@ def main():
                 continue
             else:
                 print("""
-                A expressão introduzida deve estar mal escrita. Por favor tente de novo.""")
+                        A expressão introduzida deve estar mal escrita. Por favor tente de novo.""")
 
         elif opcao == "sair":
             sair = input("""
-        Tem a certeza que quer sair? """).lower()
+                Tem a certeza que quer sair? """).lower()
             if sair == "sim":
                 guardar = input(""" 
-            Deseja guardar os ficheiros antes de sair?
-                """).lower()
+                    Deseja guardar os ficheiros antes de sair?
+                        """).lower()
                 if guardar == "sim":
                     print("""
-                Os seus dados foram guardados.
-                Esperemos que volte em breve. \N{loudly crying face}
-                    """)
+                        Os seus dados foram guardados.
+                        Esperemos que volte em breve. \N{loudly crying face}
+                            """)
                 elif guardar == "nao" or guardar == "não":
                     print("""
-                Os seus ficheiros não foram guardados.
-                Esperemos que volte em breve. \N{loudly crying face}
-                    """)
+                        Os seus ficheiros não foram guardados.
+                        Esperemos que volte em breve. \N{loudly crying face}
+                            """)
                 else:
                     print("""
-                A expressão introduzida não tem nada haver com a pergunta.
-                Por isso vamos guardar os seus dados.
-                Esperemos que volte em breve. \N{loudly crying face}
-                    """)
-                    
+                        A expressão introduzida não tem nada haver com a pergunta.
+                        Por isso vamos guardar os seus dados.
+                        Esperemos que volte em breve. \N{loudly crying face}
+                            """)
+                            
                 break
             elif sair == "não" or sair =="nao":
                 continue
             else:
                 print("""
-            A expressão introduzida não tem nada haver com a pergunta.
-            Por isso vou considerar como um não. \U0001F606 """) 
+                    A expressão introduzida não tem nada haver com a pergunta.
+                    Por isso vou considerar como um não. \U0001F606 """) 
 
         else:
             print("""
-        A expressão introduzida deve estar mal escrita. Por favor tente de novo. """)
+                A expressão introduzida deve estar mal escrita. Por favor tente de novo. """)
