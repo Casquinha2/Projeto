@@ -110,29 +110,32 @@ def main():
                     print(f"""
                 O jogador {opcao[2]} não se encontra registrado.""")
                 
-                jogador1 = opcao[1]
-                jogador2 = opcao[2]
+                jog_jogo.append(opcao[1])
+                jog_jogo.append(opcao[2])
+                bubble_sort(jog_jogo)
+                jogador1 = jog_jogo[0]
+                jogador2 = jog_jogo[1]
                 if opcao[3] == "Pequeno" or opcao[3] == "pequeno":
                     w = 5
                     h = 4
                     n = 3
                     grelha = criar_grelha(w, h)
-                    for i in range(h):
-                        print(grelha[i])
+                    print(f"""
+                    Jogo iniciado entre {jogador1} e {jogador2}.""")
                 elif opcao[3] == "Médio" or opcao[3] == "médio":
                     w = 7
                     h = 6
                     n = 4
                     grelha = criar_grelha(w, h)
-                    for i in range(h):
-                        print(grelha[i])
+                    print(f"""
+                    Jogo iniciado entre {jogador1} e {jogador2}.""")
                 elif opcao[3] == "grande" or opcao[3] == "Grande":
                     w = 11
                     h = 8
                     n = 6
                     grelha = criar_grelha(w, h)
-                    for i in range(h):
-                        print(grelha[i])
+                    print(f"""
+                    Jogo iniciado entre {jogador1} e {jogador2}.""")
                 elif opcao[3] == int:  #depois fica as regras de insucesso tamanho
                     if opcao[4] < (opcao[3]/2) or opcao[4] > opcao[3]:
                         print(f"""
@@ -141,7 +144,7 @@ def main():
                         print("""
                 Tamanho de sequência invalido.""")
                 pass
-                #falta a condição das pessas especiais
+                #falta a condição das peças especiais
             elif opcao[0] == "DJ":
                 if jog_jogo == []:
                             print("""
@@ -155,8 +158,8 @@ def main():
                             """)#falta adicionar tamanho e quantidade de peças especiais.
                     pass
             elif opcao[0] == "V":
-                    print(grelha)
-                    pass
+                    for i in range(h):
+                        print(grelha[i])
             elif opcao[0] == "CP":
                     pass
             elif opcao[0] == "D":
