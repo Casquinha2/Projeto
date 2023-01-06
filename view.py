@@ -114,7 +114,9 @@ def main():
                 jog_jogo.append(opcao[2])
                 bubble_sort(jog_jogo)
                 jogador1 = jog_jogo[0]
+                idjog1 = 1
                 jogador2 = jog_jogo[1]
+                idjog2 = 2
                 if opcao[3] == "Pequeno" or opcao[3] == "pequeno":
                     w = 5
                     h = 4
@@ -161,7 +163,22 @@ def main():
                     for i in range(h):
                         print(grelha[i])
             elif opcao[0] == "CP":
-                    pass
+                if grelha == "":
+                    print("""
+                    Não existe nenhum jogo em curso.""")
+                elif opcao[1] not in jog_jogo:
+                    print(f"""
+                    O jogador {opcao[1]} não está a participar no jogo em curso.""")
+                
+                #falta elif das peças especiais
+
+                elif opcao[3] - 1 > w or opcao[3] < 0:    #sem sentido, modificar com peças especiais
+                    print("""
+                    Posição irregular""")
+                else:
+                    if opcao[1] == jogador1:
+                        grelha = colocar_peca(opcao[2], h, grelha, idjog1)
+                        
             elif opcao[0] == "D":
                     pass
             elif opcao[0] == "Voltar":
