@@ -83,7 +83,7 @@ def main():
                        Aqui deve indicar os nome dos dois jogadores; comprimento e altura da grelha de jogo;
                          tamanho da sequência para a vitória;
                          tamanho das peças especiais (pode usar a quantidade de peças que lhe apetecer).
-                       Também sempre pode optar por usar as nossas grelhes pré-definidas.
+                       Também sempre pode optar por usar as nossas grelhas pré-definidas.
                          Só precisa digitar os nomes do jogador e:
                            -Pequeno - Para uma grelha com dimenções 
                            -Médio - Para uma grelha com dimensões 
@@ -172,12 +172,13 @@ def main():
                 
                 #falta elif das peças especiais
 
-                elif opcao[3] - 1 > w or opcao[3] < 0:    #sem sentido, modificar com peças especiais
+                elif int(opcao[3]) - 1 > w or int(opcao[3]) < 0:    #sem sentido, modificar com peças especiais
                     print("""
                     Posição irregular""")
                 else:
                     if opcao[1] == jogador1:
-                        grelha = colocar_peca(opcao[2], h, grelha, idjog1)
+                        tamanho = int(opcao[2])
+                        grelha = colocar_peca(tamanho , h, grelha, idjog1)
                         
             elif opcao[0] == "D":
                     pass
