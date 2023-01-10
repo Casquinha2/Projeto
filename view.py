@@ -105,18 +105,18 @@ def main():
                 Existe um jogo em curso neste momento.""")
                 elif opcao[1] not in jog_regis:
                     print(f"""
-                O jogador {opcao[1]} não se encontra registrado.""")
+                O jogador {opcao[1]} não se encontra registado.""")
                 elif opcao[2] not in jog_regis:
                     print(f"""
-                O jogador {opcao[2]} não se encontra registrado.""")
+                O jogador {opcao[2]} não se encontra registado.""")
                 
                 jog_jogo.append(opcao[1])
                 jog_jogo.append(opcao[2])
                 bubble_sort(jog_jogo)
                 jogador1 = jog_jogo[0]
-                idjog1 = 1
+                idjog1 = "X"
                 jogador2 = jog_jogo[1]
-                idjog2 = 2
+                idjog2 = "O"
                 if opcao[3] == "Pequeno" or opcao[3] == "pequeno":
                     w = 5
                     h = 4
@@ -138,22 +138,32 @@ def main():
                     grelha = criar_grelha(w, h)
                     print(f"""
                     Jogo iniciado entre {jogador1} e {jogador2}.""")
-                elif opcao[3] == int:  #depois fica as regras de insucesso tamanho
-                    if opcao[4] < (opcao[3]/2) or opcao[4] > opcao[3]:
+                elif opcao[3] != "":  #depois fica as regras de insucesso tamanho
+                    w = int(opcao[3])
+                    h = int(opcao[4])
+                    n = int(opcao[5])
+                    lista_especiais = adicionar_pecas_especiais(opcao)
+                    ver_esp = verificar_especiais(lista_especiais, n)
+                    if h < w / 2 or h > w:
                         print(f"""
                 Dimensões de grelha invalidas.""")
-                    elif opcao[5] < opcao[3]:
+                    elif n > w:
                         print("""
                 Tamanho de sequência invalido.""")
-                pass
-                #falta a condição das peças especiais
+                    elif ver_esp == False:
+                        print("""
+                Dimensão das peças especiais são inválidas""")
+                    else:
+                        grelha = criar_grelha(w, h)
+                        print(f"""
+                    Jogo iniciado entre {jogador1} e {jogador2}.""")
             elif opcao[0] == "DJ":
                 if jog_jogo == []:
                             print("""
                         Não existe jogo em curso.""")
                 else:
                     print(f"""
-                            {opcao[3]} por {opcao[4]}
+                            {w} por {h}
                             {jogador1}
                             
                             {jogador2}
@@ -176,10 +186,17 @@ def main():
                     print("""
                     Posição irregular""")
                 else:
-                    if opcao[1] == jogador1:
-                        tamanho = int(opcao[2])
-                        grelha = colocar_peca(tamanho , h, grelha, idjog1)
-                        
+                    if int(opcao[2]) == 1:
+                        if opcao[1] == jogador1:
+                            peca = int(opcao[3]) - 1
+                            grelha = colocar_peca(peca , grelha, h, idjog1)
+                        else:
+                            peca = int(opcao[3]) - 1
+                            grelha = colocar_peca(peca , grelha, h, idjog2)
+                    else:
+                        pass
+                        #Fazer uma nova função para colocar peças especiais
+                            
             elif opcao[0] == "D":
                     pass
             elif opcao[0] == "Voltar":
