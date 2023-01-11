@@ -13,7 +13,7 @@ def criar_grelha(w, h):
     grelha = []
     lista = []
     for i in range(w):
-        lista.append("\u26AA")
+        lista.append("_")
     for j in range(h):
         grelha.append(lista)
     return grelha
@@ -29,7 +29,7 @@ def bubble_sort(lista):
 
 def colocar_peca(peca, grelha, h, jog):
     for i in range(h - 1, 0 , -1):
-        if grelha[i,peca] != "\u26AA":
+        if grelha[i,peca] != "_":
             continue
         else:
             grelha[i,peca] = jog
