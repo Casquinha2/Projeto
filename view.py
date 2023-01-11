@@ -171,8 +171,11 @@ def main():
                             """)#falta adicionar tamanho e quantidade de peças especiais.
                     pass
             elif opcao[0] == "V":
-                    for i in range(len(grelha)):
-                        print(grelha[i])
+                print("\n")
+                for linha in grelha:
+                    print(' '.join(linha))
+                print('\n')
+                
             elif opcao[0] == "CP":
                 if grelha == "":
                     print("""

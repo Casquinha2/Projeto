@@ -13,7 +13,7 @@ def criar_grelha(w, h):
     grelha = []
     lista = []
     for i in range(w):
-        lista.append("_")
+        lista.append("-")
     for j in range(h):
         grelha.append(lista)
     return grelha
@@ -28,15 +28,14 @@ def bubble_sort(lista):
 
 
 def colocar_peca(peca, grelha, h, jog):  #"jog"=numero do jogador "1" ou "2"
-    for i in (1, h):
-        if grelha[peca,i] != "_":
-            continue
+    espaco = "-"
+    for i in range(h-1, 0 , -1):
+        if grelha[i,peca] == espaco:
+            grelha[i,peca] = jog
+            break
         else:
-            lista = grelha[i]
-            lista.remove(peca)
-            lista.insert(peca, jog)
-            grelha[i] = lista
-    return grelha       #ideia base( ainda tem uns erros)
+            continue
+    return grelha
 
 def verificar_vitoria_horizontal(grelha, w, h, n):
     m = 0
