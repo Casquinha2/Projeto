@@ -1,8 +1,10 @@
 from controller import *
+from model import *
 def main():
     lista_jog = [] #jogadores registrados
     jog_jogo = [] #jogadores em jogo
     jog_regis = [] #só nomes sem pontuação
+    grelha = []
     print("""
     Bem vindo ao n em linha!
     """)
@@ -164,14 +166,14 @@ def main():
                         Não existe jogo em curso.""")
                 else:
                     print(f"""
-                            {w} por {h}
-                            {jogador1}
+                            {len(grelha[0])} por {len(grelha)}
+                            {jog_jogo[0]}
                             
-                            {jogador2}
+                            {jog_jogo[1]}
                             """)#falta adicionar tamanho e quantidade de peças especiais.
                     pass
             elif opcao[0] == "V":
-                    for i in range(h):
+                    for i in range(len(grelha)):
                         print(grelha[i])
             elif opcao[0] == "CP":
                 if grelha == "":
@@ -217,7 +219,15 @@ def main():
             opcao = input("""
                     Opção escolhida: """).split()
             if opcao[0] == "L":
-                ler_ficheiro_json(opcao[1])
+                ficheiro = ler_ficheiro_json(opcao[1])
+                if ficheiro[1] != []:
+                    lista_jog = ficheiro[0]
+                    grelha = ficheiro[1]
+                    jog_jogo = ficheiro[2]
+                    
+                else:
+                    lista_jog = ficheiro[0]
+                    
                 #mete a merda das igualdades, desigual :))))))
             elif opcao[0] == "G":
                 if jog_jogo != []:
