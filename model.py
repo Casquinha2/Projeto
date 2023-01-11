@@ -25,8 +25,3 @@ def ler_ficheiro_json(nome_ficheiro):
     with open(nome_ficheiro) as f:
         data = json.load(f)
     return data
-
-def ler_ficheiro_json_sgrelha(nome_ficheiro):
-    with open(nome_ficheiro) as f:
-        data = json.load(f)
-    return data

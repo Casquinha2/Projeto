@@ -1,4 +1,3 @@
-import json
 def adicionar_jogador(nome):
     dicionario = {"jogador": nome, "jogos": 0, "Pontos": 0}
     return dicionario
@@ -114,18 +113,3 @@ def verificar_especiais(lista, n):
             return False
     return True
 
-
-
-
-def escrever_ficheiro_json(nome_ficheiro, j,g,jj):
-    
-    
-    json_string = json.dumps(j)
-    json_string2 = json.dumps(g)
-    json_string3 = json.dumps(jj)
-    json_file = open(nome_ficheiro, "x")
-
-    json_file.write(json_string)
-    json_file.write(json_string2)
-    json_file.write(json_string3)
-    json_file.close()

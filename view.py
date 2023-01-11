@@ -223,12 +223,9 @@ def main():
                 if ficheiro[1] != []:
                     lista_jog = ficheiro[0]
                     grelha = ficheiro[1]
-                    jog_jogo = ficheiro[2]
-                    
+                    jog_jogo = ficheiro[2]   
                 else:
                     lista_jog = ficheiro[0]
-                    
-                #mete a merda das igualdades, desigual :))))))
             elif opcao[0] == "G":
                 if jog_jogo != []:
                     escrever_ficheiro_json(opcao[1], lista_jog, grelha, jog_jogo)
