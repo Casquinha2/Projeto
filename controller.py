@@ -1,3 +1,4 @@
+import json
 def adicionar_jogador(nome):
     dicionario = {"jogador": nome, "jogos": 0, "Pontos": 0}
     return dicionario
@@ -112,3 +113,41 @@ def verificar_especiais(lista, n):
         if i >= n:
             return False
     return True
+
+def escrever_ficheiro_json(nome_ficheiro, j,g,jj):
+    
+    json_string = json.dumps(j)
+    json_string2 = json.dumps(g)
+    json_string3 = json.dumps(jj)
+    json_file = open(nome_ficheiro, "x")
+
+    json_file.write(json_string)
+    json_file.write(json_string2)
+    json_file.write(json_string3)
+    json_file.close()
+
+def escrever_ficheiro_json_sgrelha(nome_ficheiro, j):
+    
+    json_string = json.dumps(j)
+    json_file = open(nome_ficheiro, "x")
+
+    json_file.write(json_string)
+    json_file.close()
+
+
+def ler_ficheiro_json(nome_ficheiro):
+    with open(nome_ficheiro) as f:
+        data = json.load(f)
+    return data
+
+def ler_ficheiro(nome_ficheiro):
+    arquivo = open(nome_ficheiro, encoding="utf8")
+    linhas = arquivo.read()
+    arquivo.close()
+    return linhas
+
+def escrever_ficheiro(nome_ficheiro, j,g):
+    t = j+g
+    arquivo = open(nome_ficheiro, "w", encoding="utf8" )
+    arquivo.write(t)
+    arquivo.close() 

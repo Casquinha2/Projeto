@@ -109,54 +109,55 @@ def main():
                 elif opcao[2] not in jog_regis:
                     print(f"""
                 O jogador {opcao[2]} não se encontra registado.""")
-                
-                jog_jogo.append(opcao[1])
-                jog_jogo.append(opcao[2])
-                bubble_sort(jog_jogo)
-                jogador1 = jog_jogo[0]
-                idjog1 = "X"
-                jogador2 = jog_jogo[1]
-                idjog2 = "O"
-                if opcao[3] == "Pequeno" or opcao[3] == "pequeno":
-                    w = 5
-                    h = 4
-                    n = 3
-                    grelha = criar_grelha(w, h)
-                    print(f"""
-                    Jogo iniciado entre {jogador1} e {jogador2}.""")
-                elif opcao[3] == "Médio" or opcao[3] == "médio":
-                    w = 7
-                    h = 6
-                    n = 4
-                    grelha = criar_grelha(w, h)
-                    print(f"""
-                    Jogo iniciado entre {jogador1} e {jogador2}.""")
-                elif opcao[3] == "grande" or opcao[3] == "Grande":
-                    w = 11
-                    h = 8
-                    n = 6
-                    grelha = criar_grelha(w, h)
-                    print(f"""
-                    Jogo iniciado entre {jogador1} e {jogador2}.""")
-                elif opcao[3] != "":  #depois fica as regras de insucesso tamanho
-                    w = int(opcao[3])
-                    h = int(opcao[4])
-                    n = int(opcao[5])
-                    lista_especiais = adicionar_pecas_especiais(opcao)
-                    ver_esp = verificar_especiais(lista_especiais, n)
-                    if h < w / 2 or h > w:
-                        print(f"""
-                Dimensões de grelha invalidas.""")
-                    elif n > w:
-                        print("""
-                Tamanho de sequência invalido.""")
-                    elif ver_esp == False:
-                        print("""
-                Dimensão das peças especiais são inválidas""")
-                    else:
+                else:
+
+                    jog_jogo.append(opcao[1])
+                    jog_jogo.append(opcao[2])
+                    bubble_sort(jog_jogo)
+                    jogador1 = jog_jogo[0]
+                    idjog1 = "X"
+                    jogador2 = jog_jogo[1]
+                    idjog2 = "O"
+                    if opcao[3] == "Pequeno" or opcao[3] == "pequeno":
+                        w = 5
+                        h = 4
+                        n = 3
                         grelha = criar_grelha(w, h)
                         print(f"""
-                    Jogo iniciado entre {jogador1} e {jogador2}.""")
+                        Jogo iniciado entre {jogador1} e {jogador2}.""")
+                    elif opcao[3] == "Médio" or opcao[3] == "médio":
+                        w = 7
+                        h = 6
+                        n = 4
+                        grelha = criar_grelha(w, h)
+                        print(f"""
+                        Jogo iniciado entre {jogador1} e {jogador2}.""")
+                    elif opcao[3] == "grande" or opcao[3] == "Grande":
+                        w = 11
+                        h = 8
+                        n = 6
+                        grelha = criar_grelha(w, h)
+                        print(f"""
+                        Jogo iniciado entre {jogador1} e {jogador2}.""")
+                    elif opcao[3] != "":  #depois fica as regras de insucesso tamanho
+                        w = int(opcao[3])
+                        h = int(opcao[4])
+                        n = int(opcao[5])
+                        lista_especiais = adicionar_pecas_especiais(opcao)
+                        ver_esp = verificar_especiais(lista_especiais, n)
+                        if h < w / 2 or h > w:
+                            print(f"""
+                    Dimensões de grelha invalidas.""")
+                        elif n > w:
+                            print("""
+                    Tamanho de sequência invalido.""")
+                        elif ver_esp == False:
+                            print("""
+                    Dimensão das peças especiais são inválidas""")
+                        else:
+                            grelha = criar_grelha(w, h)
+                            print(f"""
+                        Jogo iniciado entre {jogador1} e {jogador2}.""")
             elif opcao[0] == "DJ":
                 if jog_jogo == []:
                             print("""
@@ -214,12 +215,16 @@ def main():
                         Voltar
                     """)
             opcao = input("""
-                    Opção escolhida: """)
-            if opcao == "L":
-                pass
-            elif opcao == "G":
-                pass
-            elif opcao == "Voltar":
+                    Opção escolhida: """).split()
+            if opcao[0] == "L":
+                ler_ficheiro_json(opcao[1])
+                #mete a merda das igualdades, desigual :))))))
+            elif opcao[0] == "G":
+                if jog_jogo != []:
+                    escrever_ficheiro_json(opcao[1], lista_jog, grelha, jog_jogo)
+                else:
+                    escrever_ficheiro_json_sgrelha(opcao[1], lista_jog)
+            elif opcao[0] == "Voltar":
                 continue
             else:
                 print("""
@@ -237,11 +242,13 @@ def main():
                         Os seus dados foram guardados.
                         Esperemos que volte em breve. \N{loudly crying face}
                             """)
+                    break #Falta codigo de guardar
                 elif guardar == "nao" or guardar == "não":
                     print("""
                         Os seus ficheiros não foram guardados.
                         Esperemos que volte em breve. \N{loudly crying face}
                             """)
+                    break
                 else:
                     print("""
                         A expressão introduzida não tem nada haver com a pergunta.
