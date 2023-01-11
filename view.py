@@ -117,9 +117,7 @@ def main():
                     jog_jogo.append(opcao[2])
                     bubble_sort(jog_jogo)
                     jogador1 = jog_jogo[0]
-                    idjog1 = "X"
                     jogador2 = jog_jogo[1]
-                    idjog2 = "O"
                     if opcao[3] == "Pequeno" or opcao[3] == "pequeno":
                         w = 5
                         h = 4
@@ -185,17 +183,17 @@ def main():
                 
                 #falta elif das peças especiais
 
-                elif int(opcao[3]) - 1 > w or int(opcao[3]) < 0:    #sem sentido, modificar com peças especiais
+                elif int(opcao[3]) - 1 > len(grelha[0]) or int(opcao[3]) < 0:    #sem sentido, modificar com peças especiais
                     print("""
                     Posição irregular""")
                 else:
                     if int(opcao[2]) == 1:
-                        if opcao[1] == jogador1:
+                        if opcao[1] == jog_jogo[0]:
                             peca = int(opcao[3]) - 1
-                            grelha = colocar_peca(peca , grelha, h, idjog1)
+                            grelha = colocar_peca(peca , grelha, len(grelha), "X")
                         else:
                             peca = int(opcao[3]) - 1
-                            grelha = colocar_peca(peca , grelha, h, idjog2)
+                            grelha = colocar_peca(peca , grelha, len(grelha), "O")
                     else:
                         pass
                         #Fazer uma nova função para colocar peças especiais
