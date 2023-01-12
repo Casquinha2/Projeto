@@ -29,48 +29,46 @@ def bubble_sort(lista):
 
 def colocar_peca(peca, grelha, h, jog):
     for i in range(h - 1, 0 , -1):
-        if grelha[i,peca] != "_":
+        if grelha[i][peca] != "_":
             continue
         else:
-            grelha[i,peca] = jog
+            grelha[i][peca] = jog
             break
     return grelha
 
 def verificar_vitoria_horizontal(grelha, w, h, n):
     m = 0
-    for j in range(h):
+    for j in range(h - 1, 0, -1):
         for k in range(w - 1):
-            if grelha [j, k] != 0:
-                if grelha[j, k] == grelha[j, k + 1]:
+            if grelha [j][k] != "_":
+                if grelha[j][k] == grelha[j][k + 1]:
                     m += 1
+                    if m + 1 == n:
+                        return True
                 else:
                     m = 0
-    if m == n:
-        return True
-    else:
-        return False
 
 def verificar_vitoria_vertical(grelha, w, h, n):
     m = 0
     for j in range(h - 1):
         for k in range(w):
-            if grelha [j, k] != 0:
-                if grelha[j, k] == grelha[j + 1, k]:
+            if grelha [j][k] != "_":
+                if grelha[j][k] == grelha[j + 1][k]:
                     m += 1
+                    if m + 1 == n:
+                        return True
                 else:
                     m = 0
-    if m == n:
-        return True
-    else:
-        return False
     
 def verificar_vitoria_diagonal_baixo(grelha, w, h, n):
     m = 0
     for j in range(h - 1):
         for k in range(w - 1):
-            if grelha [j, k] != 0:
-                if grelha[j, k] == grelha[j + 1, k + 1]:
+            if grelha [j][k] != "_":
+                if grelha[j][k] == grelha[j + 1][k + 1]:
                     m += 1
+                    if m + 1 == n:
+                        return True
                 else:
                     m = 0
     if m == n:
@@ -80,10 +78,10 @@ def verificar_vitoria_diagonal_baixo(grelha, w, h, n):
 
 def verificar_vitoria_diagonal_cima(grelha, w, h, n):
     m = 0
-    for j in range(h - 1):
-        for k in range(1, w):
-            if grelha [j, k] != 0:
-                if grelha[j, k] == grelha[j -1 , k - 1]:
+    for j in range(h - 1, 0, -1):
+        for k in range(0, w):
+            if grelha [j][k] != "_":
+                if grelha[j][k] == grelha[j - 1][k  + 1]:
                     m += 1
                 else:
                     m = 0
@@ -91,9 +89,6 @@ def verificar_vitoria_diagonal_cima(grelha, w, h, n):
         return True
     else:
         return False
-
-def verificar_vitoria_diagonal_baixo():
-    pass
 
 def adicionar_pecas_especiais(opcao):
     n = 0

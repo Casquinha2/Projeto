@@ -1,8 +1,8 @@
 import json
 
-def escrever_ficheiro_json(nome_ficheiro, j,g,jj):
+def escrever_ficheiro_json(nome_ficheiro, j,g,jj, n):
     
-    tudo = [j, g, jj]
+    tudo = [j, g, jj, n]
 
     json_string = json.dumps(tudo)
     json_file = open(nome_ficheiro, "x")
