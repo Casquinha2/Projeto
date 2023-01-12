@@ -114,28 +114,16 @@ def main():
                 elif verifica2 == False:
                     print(f"""
                 O jogador {opcao[2]} não se encontra registado.""")
-                else:
-                    
+                else:                   
                     jog_jogo.append(opcao[1])
                     jog_jogo.append(opcao[2])
-                    bubble_sort(jog_jogo)
-                    
+                    bubble_sort(jog_jogo)                   
                     if opcao[3] == "Pequeno" or opcao[3] == "pequeno" or opcao[3] == "PEQUENO":
                         w = 5
                         h = 4
                         n = 3
-                        grelha = criar_grelha(w, h)
-                        print(f"""
-                        Jogo iniciado entre {jog_jogo[0]} e {jog_jogo[1]}.""")
-                    elif opcao[3] == "Médio" or opcao[3] == "médio" or opcao[3] == "MÉDIO":
-                        
-                        w = 7
-                        h = 6
-                        n = 4
-                        lista_especiais = adicionar_pecas_especiais(opcao)
-                        
-                        ver_esp = verificar_especiais(lista_especiais, n)
-                        
+                        lista_especiais = adicionar_pecas_especiais(opcao)                        
+                        ver_esp = verificar_especiais(lista_especiais, n)                        
                         if ver_esp == False:
                             print("""
                     Dimensão das peças especiais são inválidas""")
@@ -143,12 +131,32 @@ def main():
                             grelha = criar_grelha(w, h)
                             print(f"""
                         Jogo iniciado entre {jog_jogo[0]} e {jog_jogo[1]}.""")
+                    elif opcao[3] == "Médio" or opcao[3] == "médio" or opcao[3] == "MÉDIO":                        
+                        w = 7
+                        h = 6
+                        n = 4
+                        lista_especiais = adicionar_pecas_especiais(opcao)                       
+                        ver_esp = verificar_especiais(lista_especiais, n)
+                        if ver_esp == False:
+                            print("""
+                    Dimensão das peças especiais são inválidas""")
+                        else:
+                            grelha = criar_grelha(w, h)
+                            print(f"""
+                        Jogo iniciado entre {jog_jogo[0]} e {jog_jogo[1]}.""")
+                        print(grelha)
                     elif opcao[3] == "grande" or opcao[3] == "Grande" or opcao[3] == "GRANDE":
                         w = 11
                         h = 10
                         n = 6
-                        grelha = criar_grelha(w, h)
-                        print(f"""
+                        lista_especiais = adicionar_pecas_especiais(opcao)
+                        ver_esp = verificar_especiais(lista_especiais, n)
+                        if ver_esp == False:
+                            print("""
+                    Dimensão das peças especiais são inválidas""")
+                        else:
+                            grelha = criar_grelha(w, h)
+                            print(f"""
                         Jogo iniciado entre {jog_jogo[0]} e {jog_jogo[1]}.""")
                     elif opcao[3] != "":  #depois fica as regras de insucesso tamanho
                         w = int(opcao[3])
@@ -188,7 +196,7 @@ def main():
                 print('\n')
                 
             elif opcao[0] == "CP":
-                if grelha == "":
+                if grelha == []:
                     print("""
                     Não existe nenhum jogo em curso.""")
                 elif opcao[1] not in jog_jogo:
@@ -205,6 +213,35 @@ def main():
                         if opcao[1] == jog_jogo[0]:
                             peca = int(opcao[3]) - 1
                             grelha = colocar_peca(peca , grelha, len(grelha), "X")
+                            vitoria = verificar_vitoria_horizontal(grelha, len(grelha[0]), len(grelha), n)
+                            if vitoria == True:
+                                print("1")
+                                print(f"O jogador {opcao[1]} ganhou!")
+                                grelha = []
+                                jog_jogo = []
+                            else:
+                                vitoria = verificar_vitoria_vertical(grelha, len(grelha[0]), len(grelha), n)
+                                if vitoria == True:
+                                    print("2")
+                                    print(f"O jogador {opcao[1]} ganhou!")
+                                    grelha = []
+                                    jog_jogo = []
+                                else:
+                                    vitoria = verificar_vitoria_diagonal_baixo(grelha,len(grelha[0]), len(grelha),n)
+                                    if vitoria == True:
+                                        print("3")
+                                        print(f"O jogador {opcao[1]} ganhou!")
+                                        grelha = []
+                                        jog_jogo = []
+                                    else:
+                                        vitoria = verificar_vitoria_diagonal_cima(grelha, len(grelha[0]), len(grelha), n)                    
+                                        if vitoria == True:
+                                            print("4")
+                                            print(f"O jogador {opcao[1]} ganhou!")
+                                            grelha = []
+                                            jog_jogo = []
+                                        else:
+                                            continue
                         else:
                             peca = int(opcao[3]) - 1
                             grelha = colocar_peca(peca , grelha, len(grelha), "O")
@@ -222,7 +259,7 @@ def main():
                                     grelha = []
                                     jog_jogo = []
                                 else:
-                                    vitoria = verificar_vitoria_diagonal_baixo(grelha, len(grelha[0]), len(grelha), n)
+                                    vitoria = verificar_vitoria_diagonal_baixo(grelha,n)
                                     if vitoria == True:
                                         print("3")
                                         print(f"O jogador {opcao[1]} ganhou!")

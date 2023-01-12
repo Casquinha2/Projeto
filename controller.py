@@ -30,9 +30,12 @@ def bubble_sort(lista):
 def colocar_peca(peca, grelha, h, jog):
     for i in range(h - 1, 0 , -1):
         if grelha[i][peca] != "_":
+            print("1")    
             continue
         else:
+            print("2")
             grelha[i][peca] = jog
+            print (grelha)
             break
     return grelha
 
@@ -60,17 +63,9 @@ def verificar_vitoria_vertical(grelha, w, h, n):
                 else:
                     m = 0
     
-def verificar_vitoria_diagonal_baixo(grelha, w, h, n):
-    m = 0
-    for j in range(h - 1, - 1, - 1):
-        for k in range(w - 1):
-            if grelha [j][k] != "_":
-                if grelha[j][k] == grelha[j - 1][k - 1]:
-                    m += 1
-                    if m + 1 == n:
-                        return True
-                else:
-                    m = 0
+def verificar_vitoria_diagonal_baixo(grelha, n):
+    return False
+
 
 def verificar_vitoria_diagonal_cima(grelha, w, h, n):
     m = 0
