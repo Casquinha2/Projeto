@@ -38,7 +38,7 @@ def colocar_peca(peca, grelha, h, jog):
 
 def verificar_vitoria_horizontal(grelha, w, h, n):
     m = 0
-    for j in range(h - 1, 0, -1):
+    for j in range(h - 1, - 1, - 1):
         for k in range(w - 1):
             if grelha [j][k] != "_":
                 if grelha[j][k] == grelha[j][k + 1]:
@@ -50,10 +50,10 @@ def verificar_vitoria_horizontal(grelha, w, h, n):
 
 def verificar_vitoria_vertical(grelha, w, h, n):
     m = 0
-    for j in range(h - 1):
-        for k in range(w):
+    for k in range(w):
+        for j in range(h - 1, 0, -1):
             if grelha [j][k] != "_":
-                if grelha[j][k] == grelha[j + 1][k]:
+                if grelha[j][k] == grelha[j - 1][k]:
                     m += 1
                     if m + 1 == n:
                         return True
@@ -62,10 +62,10 @@ def verificar_vitoria_vertical(grelha, w, h, n):
     
 def verificar_vitoria_diagonal_baixo(grelha, w, h, n):
     m = 0
-    for j in range(h - 1):
+    for j in range(h - 1, - 1, - 1):
         for k in range(w - 1):
             if grelha [j][k] != "_":
-                if grelha[j][k] == grelha[j + 1][k + 1]:
+                if grelha[j][k] == grelha[j - 1][k - 1]:
                     m += 1
                     if m + 1 == n:
                         return True
@@ -84,19 +84,32 @@ def verificar_vitoria_diagonal_cima(grelha, w, h, n):
                 else:
                     m = 0
 
-def adicionar_pecas_especiais(opcao):
-    n = 0
+def adicionar_pecas_especiais_custom(opcao):
+    n = len(opcao)
     lista = []
-    while opcao[n] != "":
-        n+1
-    for i in range(6, n + 1):
-        temp = int(opcao[i])
-        lista.append(temp)
+    if n > 6:
+        if opcao[6] != "":
+            for i in range(6, n + 1):
+                temp = int(opcao[i])
+                lista.append(temp)
+    return lista
+
+def adicionar_pecas_especiais(opcao):
+    n = len(opcao)
+    lista = []
+    if n > 4:
+        for i in range(4, n + 1):
+            print(i)
+            print(opcao[i])
+            temp = int(opcao[i])
+            lista.append(temp)
     return lista
 
 def verificar_especiais(lista, n):
     for i in lista:
         if i >= n:
+            return False
+        elif n == []:
             return False
     return True
 
@@ -133,7 +146,7 @@ def adicionar_pontos_2(lista, nome):
     
 def verificar_jogador(lista, jogador):
     for i in lista:
-        nome = i.pop("Jogador")
+        nome = i.get("Jogador")
         if nome == jogador:
             return True
     return False
