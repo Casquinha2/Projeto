@@ -118,21 +118,32 @@ def main():
                     bubble_sort(jog_jogo)
                     jogador1 = jog_jogo[0]
                     jogador2 = jog_jogo[1]
-                    if opcao[3] == "Pequeno" or opcao[3] == "pequeno":
+                    if opcao[3] == "Pequeno" or opcao[3] == "pequeno" or opcao[3] == "PEQUENO":
                         w = 5
                         h = 4
                         n = 3
                         grelha = criar_grelha(w, h)
                         print(f"""
                         Jogo iniciado entre {jogador1} e {jogador2}.""")
-                    elif opcao[3] == "Médio" or opcao[3] == "médio":
+                    elif opcao[3] == "Médio" or opcao[3] == "médio" or opcao[3] == "MÉDIO":
                         w = 7
                         h = 6
                         n = 4
-                        grelha = criar_grelha(w, h)
-                        print(f"""
+                        if opcao[3] != "":
+                            lista_especiais = adicionar_pecas_especiais(opcao)
+                            ver_esp = verificar_especiais(lista_especiais, n)
+                            if ver_esp == False:
+                                print("""
+                    Dimensão das peças especiais são inválidas""")
+                            else:
+                                grelha = criar_grelha(w, h)
+                                print(f"""
                         Jogo iniciado entre {jogador1} e {jogador2}.""")
-                    elif opcao[3] == "grande" or opcao[3] == "Grande":
+                        else:
+                            grelha = criar_grelha(w, h)
+                            print(f"""
+                        Jogo iniciado entre {jogador1} e {jogador2}.""")
+                    elif opcao[3] == "grande" or opcao[3] == "Grande" or opcao[3] == "GRANDE":
                         w = 11
                         h = 8
                         n = 6
@@ -228,7 +239,42 @@ def main():
                         #Fazer uma nova função para colocar peças especiais
                             
             elif opcao[0] == "D":
-                    pass         #FALTA FAZER DESISTIR
+                if opcao[2] == "":
+                    if opcao[1] not in lista_jog:
+                        print(f"""
+                    O jogador {opcao[1]} não está registado..""")
+                    elif jog_jogo == []:
+                        print("""
+                    Não existe um jogo em curso.""")
+                    elif opcao[1] not in jog_jogo:
+                        print(f"""
+                    O jogador {opcao[1]} não participa no jogo em curso.""")
+                    else:
+                        jog_jogo = []
+                        grelha = []
+                        lista_jog = adicionar_pontos_1(lista_jog, opcao[1], jog_jogo)
+                else:
+                    if opcao[1] not in lista_jog:
+                        print(f"""
+                    O jogador {opcao[1]} não está registado.""")
+                    elif opcao[2] not in lista_jog:
+                        print(f"""
+                    O jogador {opcao[2]} não está registado.""")
+                    elif jog_jogo == []:
+                        print("""
+                    Não existe um jogo em curso.""")
+                    elif opcao[1] not in jog_jogo:
+                        print(f"""
+                    O jogador {opcao[1]} não participa no jogo em curso.""")
+                    elif opcao[2] not in jog_jogo:
+                        print(f"""
+                    O jogador {opcao[2]} não participa no jogo em curso.""")
+                    else:
+                        jog_jogo = []
+                        grelha = []
+                        lista_jog = adicionar_pontos_2(lista_jog, opcao[1], jog_jogo)
+                        lista_jog = adicionar_pontos_2(lista_jog, opcao[2], jog_jogo)
+
             elif opcao[0] == "Voltar":
                 continue
             else:
@@ -251,12 +297,13 @@ def main():
                     lista_jog = ficheiro[0]
                     grelha = ficheiro[1]
                     jog_jogo = ficheiro[2]
-                    n = ficheiro[3][0]  
+                    n = ficheiro[3][0]
+                    lista_especiais = ficheiro[4]
                 else:
                     lista_jog = ficheiro[0]
             elif opcao[0] == "G":
                 if jog_jogo != []:
-                    escrever_ficheiro_json(opcao[1], lista_jog, grelha, jog_jogo)
+                    escrever_ficheiro_json(opcao[1], lista_jog, grelha, jog_jogo, n, lista_especiais)
                 else:
                     escrever_ficheiro_json_sgrelha(opcao[1], lista_jog)
             elif opcao[0] == "Voltar":
@@ -273,11 +320,14 @@ def main():
                     Deseja guardar os ficheiros antes de sair?
                         """).lower()
                 if guardar == "sim":
+                    nome_ficheiro = input("""
+                    Coloque aqui o nome que quer para o ficheiro: """)
+                    escrever_ficheiro_json(nome_ficheiro, lista_jog, grelha, jog_jogo, n, lista_especiais)
                     print("""
                         Os seus dados foram guardados.
                         Esperemos que volte em breve. \N{loudly crying face}
                             """)
-                    break #Falta codigo de guardar
+                    break
                 elif guardar == "nao" or guardar == "não":
                     print("""
                         Os seus ficheiros não foram guardados.

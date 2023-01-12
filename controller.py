@@ -1,10 +1,10 @@
 def adicionar_jogador(nome):
-    dicionario = {"jogador": nome, "jogos": 0, "Pontos": 0}
+    dicionario = {"Jogador": nome, "Pontos": 0, "Jogos": 0}
     return dicionario
 
 def remover_jogador(nome, lista):
     for i in lista:
-        jogador = i.get("jogador")
+        jogador = i.get("Jogador")
         if jogador == nome:
             lista.remove(i)
             return lista
@@ -71,10 +71,6 @@ def verificar_vitoria_diagonal_baixo(grelha, w, h, n):
                         return True
                 else:
                     m = 0
-    if m == n:
-        return True
-    else:
-        return False
 
 def verificar_vitoria_diagonal_cima(grelha, w, h, n):
     m = 0
@@ -83,12 +79,10 @@ def verificar_vitoria_diagonal_cima(grelha, w, h, n):
             if grelha [j][k] != "_":
                 if grelha[j][k] == grelha[j - 1][k  + 1]:
                     m += 1
+                    if m + 1 == n:
+                        return True
                 else:
                     m = 0
-    if m == n:
-        return True
-    else:
-        return False
 
 def adicionar_pecas_especiais(opcao):
     n = 0
@@ -105,4 +99,35 @@ def verificar_especiais(lista, n):
         if i >= n:
             return False
     return True
+
+def adicionar_pontos_1(lista, nome, jog_jogo):
+    jog_jogo.remove(nome)
+    vitorioso = jog_jogo[0]
+    for i in lista:
+        if nome in i:
+            jogos = i.pop("Jogos")
+            jogos += 1
+            dic = {"Jogos": jogos}
+            lista.update(dic)
+            break
+    for i in lista:
+        if vitorioso in i:
+            pontos = i.pop("Pontos")
+            jogos = i.pop("Jogos")
+            pontos += 1
+            jogos += 1
+            dic = {"Pontos": pontos, "Jogos": jogos}
+            lista.update(dic)
+            break
+    return lista
+
+def adicionar_pontos_2(lista, nome):
+    for i in lista:
+        if nome in i:
+            jogos = i.pop("Jogos")
+            jogos += 1
+            dic = {"Jogos": jogos}
+            lista.update(dic)
+            break
+    return lista
 
