@@ -197,12 +197,38 @@ def main():
                         else:
                             peca = int(opcao[3]) - 1
                             grelha = colocar_peca(peca , grelha, len(grelha), "O")
+                            vitoria = verificar_vitoria_horizontal(grelha, len(grelha[0]), len(grelha), n)
+                            if vitoria == True:
+                                print(f"O jogador {opcao[1]} ganhou!")
+                                grelha = []
+                                jog_jogo = []
+                            else:
+                                vitoria = verificar_vitoria_vertical(grelha, len(grelha[0]), len(grelha), n)
+                                if vitoria == True:
+                                    print(f"O jogador {opcao[1]} ganhou!")
+                                    grelha = []
+                                    jog_jogo = []
+                                else:
+                                    vitoria = verificar_vitoria_diagonal_baixo(grelha, len(grelha[0]), len(grelha), n)
+                                    if vitoria == True:
+                                        print(f"O jogador {opcao[1]} ganhou!")
+                                        grelha = []
+                                        jog_jogo = []
+                                    else:
+                                        vitoria = verificar_vitoria_diagonal_cima(grelha, len(grelha[0]), len(grelha), n)                    
+                                        if vitoria == True:
+                                            print(f"O jogador {opcao[1]} ganhou!")
+                                            grelha = []
+                                            jog_jogo = []
+                                        else:
+                                            continue
+                                            
                     else:
                         pass
                         #Fazer uma nova função para colocar peças especiais
                             
             elif opcao[0] == "D":
-                    pass
+                    pass         #FALTA FAZER DESISTIR
             elif opcao[0] == "Voltar":
                 continue
             else:
@@ -224,7 +250,8 @@ def main():
                 if ficheiro[1] != []:
                     lista_jog = ficheiro[0]
                     grelha = ficheiro[1]
-                    jog_jogo = ficheiro[2]   
+                    jog_jogo = ficheiro[2]
+                    n = ficheiro[3][0]  
                 else:
                     lista_jog = ficheiro[0]
             elif opcao[0] == "G":
