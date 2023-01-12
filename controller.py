@@ -11,11 +11,11 @@ def remover_jogador(nome, lista):
 
 def criar_grelha(w, h):
     grelha = []
-    lista = []
-    for i in range(w):
-        lista.append("_")
     for j in range(h):
-        grelha.append(lista)
+        linha = []
+        for i in range(w):
+            linha.append("_")
+        grelha.append(linha)
     return grelha
 
 def bubble_sort(lista):
@@ -28,7 +28,7 @@ def bubble_sort(lista):
 
 
 def colocar_peca(peca, grelha, h, jog):
-    for i in range(h - 1, 0 , -1):
+    for i in range(h-1, 0, -1):
         if grelha[i][peca] != "_":
             print("1")    
             continue

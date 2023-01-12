@@ -233,6 +233,7 @@ def main():
                                         print(f"O jogador {opcao[1]} ganhou!")
                                         grelha = []
                                         jog_jogo = []
+                                    
                                     else:
                                         vitoria = verificar_vitoria_diagonal_cima(grelha, len(grelha[0]), len(grelha), n)                    
                                         if vitoria == True:
@@ -241,7 +242,7 @@ def main():
                                             grelha = []
                                             jog_jogo = []
                                         else:
-                                            continue
+                                            continue           
                         else:
                             peca = int(opcao[3]) - 1
                             grelha = colocar_peca(peca , grelha, len(grelha), "O")
@@ -343,7 +344,8 @@ def main():
                     lista_jog = ficheiro[0]
             elif opcao[0] == "G":
                 if jog_jogo != []:
-                    escrever_ficheiro_json(opcao[1], lista_jog, grelha, jog_jogo, n, lista_especiais)
+                    listan = [n]
+                    escrever_ficheiro_json(opcao[1], lista_jog, grelha, jog_jogo, listan, lista_especiais)
                 else:
                     escrever_ficheiro_json_sgrelha(opcao[1], lista_jog)
             elif opcao[0] == "Voltar":
