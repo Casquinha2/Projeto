@@ -1,8 +1,10 @@
 from controller import *
+from model import *
 def main():
     lista_jog = [] #jogadores registrados
     jog_jogo = [] #jogadores em jogo
     jog_regis = [] #só nomes sem pontuação
+    grelha = []
     print("""
     Bem vindo ao n em linha!
     """)
@@ -83,7 +85,7 @@ def main():
                        Aqui deve indicar os nome dos dois jogadores; comprimento e altura da grelha de jogo;
                          tamanho da sequência para a vitória;
                          tamanho das peças especiais (pode usar a quantidade de peças que lhe apetecer).
-                       Também sempre pode optar por usar as nossas grelhes pré-definidas.
+                       Também sempre pode optar por usar as nossas grelhas pré-definidas.
                          Só precisa digitar os nomes do jogador e:
                            -Pequeno - Para uma grelha com dimenções 
                            -Médio - Para uma grelha com dimensões 
@@ -105,63 +107,75 @@ def main():
                 Existe um jogo em curso neste momento.""")
                 elif opcao[1] not in jog_regis:
                     print(f"""
-                O jogador {opcao[1]} não se encontra registrado.""")
+                O jogador {opcao[1]} não se encontra registado.""")
                 elif opcao[2] not in jog_regis:
                     print(f"""
-                O jogador {opcao[2]} não se encontra registrado.""")
-                
-                jog_jogo.append(opcao[1])
-                jog_jogo.append(opcao[2])
-                bubble_sort(jog_jogo)
-                jogador1 = jog_jogo[0]
-                idjog1 = 1
-                jogador2 = jog_jogo[1]
-                idjog2 = 2
-                if opcao[3] == "Pequeno" or opcao[3] == "pequeno":
-                    w = 5
-                    h = 4
-                    n = 3
-                    grelha = criar_grelha(w, h)
-                    print(f"""
-                    Jogo iniciado entre {jogador1} e {jogador2}.""")
-                elif opcao[3] == "Médio" or opcao[3] == "médio":
-                    w = 7
-                    h = 6
-                    n = 4
-                    grelha = criar_grelha(w, h)
-                    print(f"""
-                    Jogo iniciado entre {jogador1} e {jogador2}.""")
-                elif opcao[3] == "grande" or opcao[3] == "Grande":
-                    w = 11
-                    h = 8
-                    n = 6
-                    grelha = criar_grelha(w, h)
-                    print(f"""
-                    Jogo iniciado entre {jogador1} e {jogador2}.""")
-                elif opcao[3] == int:  #depois fica as regras de insucesso tamanho
-                    if opcao[4] < (opcao[3]/2) or opcao[4] > opcao[3]:
+                O jogador {opcao[2]} não se encontra registado.""")
+                else:
+
+                    jog_jogo.append(opcao[1])
+                    jog_jogo.append(opcao[2])
+                    bubble_sort(jog_jogo)
+                    jogador1 = jog_jogo[0]
+                    jogador2 = jog_jogo[1]
+                    if opcao[3] == "Pequeno" or opcao[3] == "pequeno":
+                        w = 5
+                        h = 4
+                        n = 3
+                        grelha = criar_grelha(w, h)
                         print(f"""
-                Dimensões de grelha invalidas.""")
-                    elif opcao[5] < opcao[3]:
-                        print("""
-                Tamanho de sequência invalido.""")
-                pass
-                #falta a condição das peças especiais
+                        Jogo iniciado entre {jogador1} e {jogador2}.""")
+                    elif opcao[3] == "Médio" or opcao[3] == "médio":
+                        w = 7
+                        h = 6
+                        n = 4
+                        grelha = criar_grelha(w, h)
+                        print(f"""
+                        Jogo iniciado entre {jogador1} e {jogador2}.""")
+                    elif opcao[3] == "grande" or opcao[3] == "Grande":
+                        w = 11
+                        h = 8
+                        n = 6
+                        grelha = criar_grelha(w, h)
+                        print(f"""
+                        Jogo iniciado entre {jogador1} e {jogador2}.""")
+                    elif opcao[3] != "":  #depois fica as regras de insucesso tamanho
+                        w = int(opcao[3])
+                        h = int(opcao[4])
+                        n = int(opcao[5])
+                        lista_especiais = adicionar_pecas_especiais(opcao)
+                        ver_esp = verificar_especiais(lista_especiais, n)
+                        if h < w / 2 or h > w:
+                            print(f"""
+                    Dimensões de grelha invalidas.""")
+                        elif n > w:
+                            print("""
+                    Tamanho de sequência invalido.""")
+                        elif ver_esp == False:
+                            print("""
+                    Dimensão das peças especiais são inválidas""")
+                        else:
+                            grelha = criar_grelha(w, h)
+                            print(f"""
+                        Jogo iniciado entre {jogador1} e {jogador2}.""")
             elif opcao[0] == "DJ":
                 if jog_jogo == []:
                             print("""
                         Não existe jogo em curso.""")
                 else:
                     print(f"""
-                            {opcao[3]} por {opcao[4]}
-                            {jogador1}
+                            {len(grelha[0])} por {len(grelha)}
+                            {jog_jogo[0]}
                             
-                            {jogador2}
+                            {jog_jogo[1]}
                             """)#falta adicionar tamanho e quantidade de peças especiais.
                     pass
             elif opcao[0] == "V":
-                    for i in range(h):
-                        print(grelha[i])
+                print("\n")
+                for linha in grelha:
+                    print(' '.join(linha))
+                print('\n')
+                
             elif opcao[0] == "CP":
                 if grelha == "":
                     print("""
@@ -172,13 +186,21 @@ def main():
                 
                 #falta elif das peças especiais
 
-                elif opcao[3] - 1 > w or opcao[3] < 0:    #sem sentido, modificar com peças especiais
+                elif int(opcao[3]) - 1 > len(grelha[0]) or int(opcao[3]) < 0:    #sem sentido, modificar com peças especiais
                     print("""
                     Posição irregular""")
                 else:
-                    if opcao[1] == jogador1:
-                        grelha = colocar_peca(opcao[2], h, grelha, idjog1)
-                        
+                    if int(opcao[2]) == 1:
+                        if opcao[1] == jog_jogo[0]:
+                            peca = int(opcao[3]) - 1
+                            grelha = colocar_peca(peca , grelha, len(grelha), "X")
+                        else:
+                            peca = int(opcao[3]) - 1
+                            grelha = colocar_peca(peca , grelha, len(grelha), "O")
+                    else:
+                        pass
+                        #Fazer uma nova função para colocar peças especiais
+                            
             elif opcao[0] == "D":
                     pass
             elif opcao[0] == "Voltar":
@@ -196,12 +218,21 @@ def main():
                         Voltar
                     """)
             opcao = input("""
-                    Opção escolhida: """)
-            if opcao == "L":
-                pass
-            elif opcao == "G":
-                pass
-            elif opcao == "Voltar":
+                    Opção escolhida: """).split()
+            if opcao[0] == "L":
+                ficheiro = ler_ficheiro_json(opcao[1])
+                if ficheiro[1] != []:
+                    lista_jog = ficheiro[0]
+                    grelha = ficheiro[1]
+                    jog_jogo = ficheiro[2]   
+                else:
+                    lista_jog = ficheiro[0]
+            elif opcao[0] == "G":
+                if jog_jogo != []:
+                    escrever_ficheiro_json(opcao[1], lista_jog, grelha, jog_jogo)
+                else:
+                    escrever_ficheiro_json_sgrelha(opcao[1], lista_jog)
+            elif opcao[0] == "Voltar":
                 continue
             else:
                 print("""
@@ -219,11 +250,13 @@ def main():
                         Os seus dados foram guardados.
                         Esperemos que volte em breve. \N{loudly crying face}
                             """)
+                    break #Falta codigo de guardar
                 elif guardar == "nao" or guardar == "não":
                     print("""
                         Os seus ficheiros não foram guardados.
                         Esperemos que volte em breve. \N{loudly crying face}
                             """)
+                    break
                 else:
                     print("""
                         A expressão introduzida não tem nada haver com a pergunta.
