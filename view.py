@@ -3,7 +3,6 @@ from model import *
 def main():
     lista_jog = [] #jogadores registrados
     jog_jogo = [] #jogadores em jogo
-    jog_regis = [] #só nomes sem pontuação
     grelha = []
     print("""
     Bem vindo ao n em linha!
@@ -45,22 +44,24 @@ def main():
             if opcao[0] == "RJ":
                 if opcao[1] not in lista_jog:
                     jogador = adicionar_jogador(opcao[1])
-                    lista_jog.append(jogador)
-                    jog_regis.append(opcao[1])   
+                    lista_jog.append(jogador)  
                     print("""
                     Jogador registado com sucesso.""")
                 else:
                     print("""
                     Jogador já existe.""")
             elif opcao[0] == "EJ":
-                if opcao[1] in jog_regis and opcao[1] not in jog_jogo:
-                    lista_jog = remover_jogador(opcao[1], lista_jog)
+                verifica = verificar_jogador(lista_jog, opcao[1])
+                if grelha != []:
                     print("""
-                    Jogador removido com sucesso.""")
-                elif opcao[1] not in jog_regis:
+                    O jogador está num jogo em curso.""")
+                elif verifica == False:
                     print("""
                     Jogador ainda não foi registado.""")
                 else:
+                    lista_jog = remover_jogador(opcao[1], lista_jog)
+                    print("""
+                    Jogador removido com sucesso.""")
                     print("""
                     O jogador está num jogo em curso.""")
             elif opcao[0] == "LJ":
@@ -102,54 +103,48 @@ def main():
             Opção escolhida: """).split()
 
             if opcao[0] == "IJ":
+                verifica1 = verificar_jogador(lista_jog, opcao[1])
+                verifica2 = verificar_jogador(lista_jog, opcao[2])
                 if jog_jogo != []:
                     print("""
                 Existe um jogo em curso neste momento.""")
-                elif opcao[1] not in jog_regis:
+                elif verifica1 == False:
                     print(f"""
                 O jogador {opcao[1]} não se encontra registado.""")
-                elif opcao[2] not in jog_regis:
+                elif verifica2 == False:
                     print(f"""
                 O jogador {opcao[2]} não se encontra registado.""")
                 else:
-
                     jog_jogo.append(opcao[1])
                     jog_jogo.append(opcao[2])
                     bubble_sort(jog_jogo)
-                    jogador1 = jog_jogo[0]
-                    jogador2 = jog_jogo[1]
                     if opcao[3] == "Pequeno" or opcao[3] == "pequeno" or opcao[3] == "PEQUENO":
                         w = 5
                         h = 4
                         n = 3
                         grelha = criar_grelha(w, h)
                         print(f"""
-                        Jogo iniciado entre {jogador1} e {jogador2}.""")
+                        Jogo iniciado entre {jog_jogo[0]} e {jog_jogo[1]}.""")
                     elif opcao[3] == "Médio" or opcao[3] == "médio" or opcao[3] == "MÉDIO":
                         w = 7
                         h = 6
                         n = 4
-                        if opcao[3] != "":
-                            lista_especiais = adicionar_pecas_especiais(opcao)
-                            ver_esp = verificar_especiais(lista_especiais, n)
-                            if ver_esp == False:
-                                print("""
+                        lista_especiais = adicionar_pecas_especiais(opcao)
+                        ver_esp = verificar_especiais(lista_especiais, n)
+                        if ver_esp == False:
+                            print("""
                     Dimensão das peças especiais são inválidas""")
-                            else:
-                                grelha = criar_grelha(w, h)
-                                print(f"""
-                        Jogo iniciado entre {jogador1} e {jogador2}.""")
                         else:
                             grelha = criar_grelha(w, h)
                             print(f"""
-                        Jogo iniciado entre {jogador1} e {jogador2}.""")
+                        Jogo iniciado entre {jog_jogo[0]} e {jog_jogo[1]}.""")
                     elif opcao[3] == "grande" or opcao[3] == "Grande" or opcao[3] == "GRANDE":
                         w = 11
                         h = 8
                         n = 6
                         grelha = criar_grelha(w, h)
                         print(f"""
-                        Jogo iniciado entre {jogador1} e {jogador2}.""")
+                        Jogo iniciado entre {jog_jogo[0]} e {jog_jogo[1]}.""")
                     elif opcao[3] != "":  #depois fica as regras de insucesso tamanho
                         w = int(opcao[3])
                         h = int(opcao[4])
@@ -168,7 +163,7 @@ def main():
                         else:
                             grelha = criar_grelha(w, h)
                             print(f"""
-                        Jogo iniciado entre {jogador1} e {jogador2}.""")
+                        Jogo iniciado entre {jog_jogo[0]} e {jog_jogo[1]}.""")
             elif opcao[0] == "DJ":
                 if jog_jogo == []:
                             print("""
@@ -270,33 +265,10 @@ def main():
                         print(f"""
                     O jogador {opcao[2]} não participa no jogo em curso.""")
                     else:
-                        jog_jogo = []
-                        grelha = []
                         lista_jog = adicionar_pontos_2(lista_jog, opcao[1], jog_jogo)
                         lista_jog = adicionar_pontos_2(lista_jog, opcao[2], jog_jogo)
-
-                if opcao[1] in jog_jogo and opcao[1] in lista_jog == jogador1:
-                    desistir = remover_jogador(opcao[1], desistir)
-                    print("""
-                    Desistência com sucesso. Jogo terminado.""")
-                elif opcao[2] in jog_jogo and opcao[2] in lista_jog == jogador2:
-                    desistir = remover_jogador(opcao[2], desistir)
-                    print("""
-                    Desistência com sucesso. Jogo terminado.""")
-                elif (opcao[1] in jog_jogo and opcao[1] in lista_jog == jogador1) and (opcao[2] in jog_jogo and opcao[2] in lista_jog == jogador2):
-                    desistir = remover_jogador(opcao[1], opcao[2], desistir)
-                    print("""
-                    Desistência com sucesso. Jogo terminado.""")
-                elif opcao[1] not in lista_jog or opcao[2] not in lista_jog:
-                    print("""
-                    Jogador não registado.""")
-                elif jog_jogo == []:
-                    print("""
-                    Não existe um jogo em curso.""")
-                elif opcao[1] not in jog_jogo or opcao[2] not in jog_jogo:
-                    print("""
-                    Jogador não participa no jogo em curso.""")
-                    pass
+                        jog_jogo = []
+                        grelha = []
             elif opcao[0] == "Voltar":
                 continue
             else:

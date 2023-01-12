@@ -130,4 +130,10 @@ def adicionar_pontos_2(lista, nome):
             lista.update(dic)
             break
     return lista
-
+    
+def verificar_jogador(lista, jogador):
+    for i in lista:
+        nome = i.pop("Jogador")
+        if nome == jogador:
+            return True
+    return False
