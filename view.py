@@ -239,7 +239,6 @@ def main():
                         #Fazer uma nova função para colocar peças especiais
                             
             elif opcao[0] == "D":
-<<<<<<< Updated upstream
                 if opcao[2] == "":
                     if opcao[1] not in lista_jog:
                         print(f"""
@@ -276,7 +275,6 @@ def main():
                         lista_jog = adicionar_pontos_2(lista_jog, opcao[1], jog_jogo)
                         lista_jog = adicionar_pontos_2(lista_jog, opcao[2], jog_jogo)
 
-=======
                 if opcao[1] in jog_jogo and opcao[1] in lista_jog == jogador1:
                     desistir = remover_jogador(opcao[1], desistir)
                     print("""
@@ -299,7 +297,6 @@ def main():
                     print("""
                     Jogador não participa no jogo em curso.""")
                     pass
->>>>>>> Stashed changes
             elif opcao[0] == "Voltar":
                 continue
             else:
