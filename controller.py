@@ -63,8 +63,21 @@ def verificar_vitoria_vertical(grelha, w, h, n):
                 else:
                     m = 0
     
-def verificar_vitoria_diagonal_baixo(grelha, n):
-    return False
+def verificar_vitoria_diagonal_baixo(grelha, w, h, n):
+    m = 0                                                #horizontal
+    for j in range(h - 1, - 1, - 1):
+        for k in range(w - 1):
+            if grelha [j][k] != "_":
+                if grelha[j][k] == grelha[j][k + 1]:
+                    m += 1
+    p = 0                                                #vertical
+    for k in range(w):
+        for j in range(h - 1, 0, -1):
+            if grelha [j][k] != "_":
+                if grelha[j][k] == grelha[j - 1][k]:
+                    p += 1
+                    if p + 1 == n and m + 1 == n:
+                        return True
 
 
 def verificar_vitoria_diagonal_cima(grelha, w, h, n):
