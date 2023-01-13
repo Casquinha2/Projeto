@@ -301,7 +301,7 @@ def main():
                                                 jog_jogo = []
                                                         
                                             else:
-                                                vitoria = verificar_vitoria_diagonal_baixo(grelha, wpeca, hpeca, n, "X")
+                                                vitoria = verificar_vitoria_diagonal_baixo(grelha, wpeca, hpeca, n, "X") 
                                                 if vitoria == True:
                                                     print(f"""
                     O jogador {opcao[1]} ganhou!""")
@@ -434,15 +434,19 @@ def main():
                     Opção escolhida: """).split()
             if opcao[0] == "L" and len(opcao) > 1:
                 ficheiro = ler_ficheiro_json(opcao[1])
-                if ficheiro[1] != []:
-                    lista_jog = ficheiro[0]
-                    grelha = ficheiro[1]
-                    jog_jogo = ficheiro[2]
-                    n = ficheiro[3][0]
-                    lista_especiais1 = ficheiro[4]
-                    lista_especiais2 = ficheiro[5]
+                if ficheiro != []:
+
+                    if ficheiro[1] != []:
+                        lista_jog = ficheiro[0]
+                        grelha = ficheiro[1]
+                        jog_jogo = ficheiro[2]
+                        n = ficheiro[3][0]
+                        lista_especiais1 = ficheiro[4]
+                        lista_especiais2 = ficheiro[5]
+                    else:
+                        lista_jog = ficheiro[0]
                 else:
-                    lista_jog = ficheiro[0]
+                    print("Ocorreu um erro no carregamento.")
             elif opcao[0] == "G" and len(opcao) > 1:
                 if jog_jogo != []:
                     listan = [n]
@@ -450,7 +454,7 @@ def main():
                 else:
                     escrever_ficheiro_json_sgrelha(opcao[1], lista_jog)
             elif  opcao[0].lower() == "voltar":
-                continue
+                continue                             
             else:
                 print("""
                         A expressão introduzida deve estar mal escrita. Por favor tente de novo.""")

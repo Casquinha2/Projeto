@@ -1,3 +1,5 @@
+#Todas as fuções abaixo funcionam exceto 2
+
 def adicionar_jogador(nome):
     dicionario = {"Jogador": nome, "Pontos": 0, "Jogos": 0}
     return dicionario
@@ -61,7 +63,7 @@ def verificar_vitoria_vertical(grelha, w, h, n):
                 else:
                     m = 0
     
-def verificar_vitoria_diagonal_baixo(grelha, wpeca, hpeca, n, jog):
+def verificar_vitoria_diagonal_baixo(grelha, wpeca, hpeca, n, jog): #Antes funcionava perfeitamente mas ao longo do tempo parou de funcionar e não sabmos porque.
     m = 0
     for linha in range(-wpeca+1, wpeca, 1):
         if 0 <= hpeca - linha < len(grelha) and 0 <= wpeca + linha < len(grelha):
@@ -72,7 +74,7 @@ def verificar_vitoria_diagonal_baixo(grelha, wpeca, hpeca, n, jog):
         if m == n:
             return True
     
-def verificar_vitoria_diagonal_cima(grelha, wpeca, hpeca, n, jog):
+def verificar_vitoria_diagonal_cima(grelha, wpeca, hpeca, n, jog): #O mesmo tema do "verificar_vitoria_diagonal_baixo".
     r = 0
     for linha in range(-wpeca+1, wpeca, 1):
         if 0 <= hpeca + linha < len(grelha) and 0 <= wpeca + linha < len(grelha):
