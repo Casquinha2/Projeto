@@ -112,7 +112,6 @@ def verificar_especiais(lista, n):
 
 def adicionar_jogos_1(lista, nome, jog_jogo):
     jog_jogo.remove(nome)
-    print(jog_jogo)
     vitorioso = jog_jogo[0]
     for jogador in lista:
         if jogador["Jogador"] == nome:
