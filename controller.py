@@ -26,13 +26,13 @@ def bubble_sort(lista):
                 lista[j + 1] = temp
 
 
-def colocar_peca(peca, grelha, h, jog):
+def colocar_peca(wpeca, grelha, h, jog):
     for i in range(h - 1, -1, -1):
-        if grelha[i][peca] != "_":
+        if grelha[i][wpeca] != "_":
             validacao = False   
             continue
         else:
-            grelha[i][peca] = jog
+            grelha[i][wpeca] = jog
             validacao = True
             break
     return validacao, grelha, i
@@ -94,9 +94,9 @@ def adicionar_pecas_especiais_custom(opcao):
     return lista
 
 def adicionar_pecas_especiais(opcao):
-    n = len(opcao)
+    n = len(opcao) - 1
     lista = []
-    if n > 4:
+    if n > 3:
         for i in range(4, n + 1):
             temp = int(opcao[i])
             lista.append(temp)
@@ -156,6 +156,5 @@ def passar_especial_dic(lista_especiais):
 
 def verificar_tamanho_especiais(lista, opcao):
     for i in lista:
-        if i == opcao[2]:
+        if i == int(opcao[2]):
             return True
-    return False

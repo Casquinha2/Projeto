@@ -70,7 +70,7 @@ def main():
                     print("""
                     Não existem jogadores registados.""")
 
-            elif opcao[0].lower == "voltar":
+            elif opcao[0].lower() == "voltar":
                 continue
             else:
                 print("""
@@ -234,28 +234,31 @@ def main():
                     print("""
                 Tamanho de peça não disponivel.""")
                 else:
-                    if len(opcao) > 4:
-                        if opcao[4].lower == "direita":
-                            if 0 >= opcao[2] + opcao[3] and opcao[2] + opcao[3] >= len(grelha) + 1:
+                    if len(opcao) == 5:
+                        if opcao[4].lower() == "direita":
+                            if 0 >= int(opcao[2]) + int(opcao[3]) and int(opcao[2]) + int(opcao[3]) >= len(grelha) + 1:
                                 print("""
                 Posição irregular.""")
-                        elif opcao[4].lower == "esquerda":
-                            if 0 >= opcao[2] - opcao[3] and opcao[2] - opcao[3] >= len(grelha) + 1:
-                                print("""
-                Posição irregular.""")
-                        else:
-                            if opcao[4].lower == "direita":
-                                d = opcao[2]
-                                f = 1
-                            elif opcao[4].lower == "esquerda":
-                                d = -opcao[2]
-                                f = -1
                             else:
+                                print("1")
+                                d = int(opcao[2])
+                                f = 1
+                        elif opcao[4].lower() == "esquerda":
+                            if 0 >= int(opcao[2]) - int(opcao[3]) and int(opcao[2]) - int(opcao[3]) >= len(grelha) + 1:
                                 print("""
+                Posição irregular.""")
+                            else:
+                                print("2")
+                                d = - int(opcao[2])
+                                f = -1
+                        else:
+                            print("""
                 Sentido inválido.""")
                     else:
+                        print("3")
                         d = 1
                         f = 1
+                    print("4")
                     for i in range(0, d, f):
                         if opcao[1] == jog_jogo[0]:
                             wpeca = int(opcao[3]) - 1 + i
@@ -298,9 +301,7 @@ def main():
                                                 lista_jog = adicionar_jogos_1(lista_jog, opcao[1], jog_jogo)
                                                 grelha = []
                                                 jog_jogo = []
-                                            else:
-                                                print("""
-                    Peça colocada""")
+                                        
                                                 
                         else:
                             wpeca = int(opcao[3]) - 1
@@ -343,9 +344,8 @@ def main():
                                                 lista_jog = adicionar_jogos_1(lista_jog, opcao[1], jog_jogo)
                                                 grelha = []
                                                 jog_jogo = []
-                                            else:
-                                                print("""
-                    Peça colocada""")
+                    print("""
+                    Peça colocada""")                        
                                             
             elif opcao[0] == "D" and len(opcao) > 1:
                 if len(opcao) < 3:
@@ -391,7 +391,7 @@ def main():
                         grelha = []
                         print(f"""
                         Ambos os jogadores {opcao[1]} e {opcao[2]} desistiram. Jogo terminado.""")
-            elif opcao[0].lower == "voltar":
+            elif opcao[0].lower() == "voltar":
                 continue
             else:
                 print("""
@@ -424,7 +424,7 @@ def main():
                     escrever_ficheiro_json(opcao[1], lista_jog, grelha, jog_jogo, listan, lista_especiais1, lista_especiais2)
                 else:
                     escrever_ficheiro_json_sgrelha(opcao[1], lista_jog)
-            elif  opcao[0].lower == "voltar":
+            elif  opcao[0].lower() == "voltar":
                 continue
             else:
                 print("""
