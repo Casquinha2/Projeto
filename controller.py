@@ -2,11 +2,10 @@ def adicionar_jogador(nome):
     dicionario = {"Jogador": nome, "Pontos": 0, "Jogos": 0}
     return dicionario
 
-def remover_jogador(nome, lista):
-    for i in lista:
-        jogador = i.get("Jogador")
-        if jogador == nome:
-            lista.remove(i)
+def remover_jogador(n_jogador, lista):
+    for jogador in lista:
+        if jogador["Jogador"] == n_jogador:
+            lista.remove(jogador)
             return lista
 
 def criar_grelha(w, h):
@@ -111,39 +110,28 @@ def verificar_especiais(lista, n):
 
 def adicionar_jogos_1(lista, nome, jog_jogo):
     jog_jogo.remove(nome)
+    print(jog_jogo)
     vitorioso = jog_jogo[0]
-    for i in lista:
-        if nome in i:
-            jogos = i.pop("Jogos")
-            jogos += 1
-            dic = {"Jogos": jogos}
-            lista.update(dic)
-            break
-    for i in lista:
-        if vitorioso in i:
-            pontos = i.pop("Pontos")
-            jogos = i.pop("Jogos")
-            pontos += 1
-            jogos += 1
-            dic = {"Pontos": pontos, "Jogos": jogos}
-            lista.update(dic)
-            break
+    for jogador in lista:
+        if jogador["Jogador"] == nome:
+            jogador["Jogos"] += 1 
+            
+    for jogador in lista:
+        if jogador["Jogador"] == vitorioso:
+            jogador["Jogos"] += 1 
+            jogador["Pontos"] += 1
     return lista
+            
 
 def adicionar_jogos_2(lista, nome):
-    for i in lista:
-        if nome in i:
-            jogos = i.pop("Jogos")
-            jogos += 1
-            dic = {"Jogos": jogos}
-            lista.update(dic)
-            break
+    for jogador in lista:
+        if jogador["Jogador"] == nome:
+            jogador["Jogos"] += 1 
     return lista
     
-def verificar_jogador(lista, jogador):
-    for i in lista:
-        nome = i.get("Jogador")
-        if nome == jogador:
+def verificar_jogador(lista, n_jogador):
+    for jogador in lista:
+        if jogador["Jogador"] == n_jogador:
             return True
     return False
 

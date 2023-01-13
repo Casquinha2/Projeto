@@ -39,10 +39,10 @@ def main():
             
             """)
             opcao = input("""
-            Opção escolhida:""").split()
+            Opção escolhida: """).split()
 
-            if opcao[0] == "RJ":
-                if opcao[1] not in lista_jog:
+            if opcao[0] == "RJ" and len(opcao) > 1:
+                if verificar_jogador(lista_jog, opcao[1]) == False:
                     jogador = adicionar_jogador(opcao[1])
                     lista_jog.append(jogador)  
                     print("""
@@ -50,7 +50,7 @@ def main():
                 else:
                     print("""
                     Jogador já existe.""")
-            elif opcao[0] == "EJ":
+            elif opcao[0] == "EJ" and len(opcao) > 1:
                 verifica = verificar_jogador(lista_jog, opcao[1])
                 if grelha != []:
                     print("""
@@ -62,17 +62,15 @@ def main():
                     lista_jog = remover_jogador(opcao[1], lista_jog)
                     print("""
                     Jogador removido com sucesso.""")
-                    print("""
-                    O jogador está num jogo em curso.""")
             elif opcao[0] == "LJ":
                 if lista_jog != "":
                     for i in range(0, len(lista_jog)):
                         print(lista_jog[i])
                 elif lista_jog ==[]:
                     print("""
-                    Não existem jogadores registados""")
+                    Não existem jogadores registados.""")
 
-            elif opcao[0] == "Voltar":
+            elif opcao[0].lower == "voltar":
                 continue
             else:
                 print("""
@@ -102,7 +100,7 @@ def main():
             opcao = input("""
             Opção escolhida: """).split()
 
-            if opcao[0] == "IJ":
+            if opcao[0] == "IJ" and len(opcao) > 1:
                 verifica1 = verificar_jogador(lista_jog, opcao[1])
                 verifica2 = verificar_jogador(lista_jog, opcao[2])
                 if jog_jogo != []:
@@ -127,7 +125,7 @@ def main():
                         lista_especiais1, lista_especiais2 = duplicar_especiais(lista_especiais)                        
                         if ver_esp == False:
                             print("""
-                Dimensão das peças especiais são inválidas""")
+                Dimensão das peças especiais são inválidas.""")
                         else:
                             grelha = criar_grelha(w, h)
                             print(f"""
@@ -141,7 +139,7 @@ def main():
                         lista_especiais1, lista_especiais2 = duplicar_especiais(lista_especiais)
                         if ver_esp == False:
                             print("""
-                Dimensão das peças especiais são inválidas""")
+                Dimensão das peças especiais são inválidas.""")
                         else:
                             grelha = criar_grelha(w, h)
                             print(f"""
@@ -155,12 +153,12 @@ def main():
                         lista_especiais1, lista_especiais2 = duplicar_especiais(lista_especiais)
                         if ver_esp == False:
                             print("""
-                Dimensão das peças especiais são inválidas""")
+                Dimensão das peças especiais são inválidas.""")
                         else:
                             grelha = criar_grelha(w, h)
                             print(f"""
                     Jogo iniciado entre {jog_jogo[0]} e {jog_jogo[1]}.""")
-                    elif opcao[3] != "":
+                    elif len(opcao) > 5:
                         w = int(opcao[3])
                         h = int(opcao[4])
                         n = int(opcao[5])
@@ -175,11 +173,14 @@ def main():
                 Tamanho de sequência invalido.""")
                         elif ver_esp == False:
                             print("""
-                Dimensão das peças especiais são inválidas""")
+                Dimensão das peças especiais são inválidas.""")
                         else:
                             grelha = criar_grelha(w, h)
                             print(f"""
                 Jogo iniciado entre {jog_jogo[0]} e {jog_jogo[1]}.""")
+                    else:
+                        print("""
+                Faltam dados obrigatórios para iniciar o jogo.""")
             elif opcao[0] == "DJ":
                 if jog_jogo == []:
                             print("""
@@ -188,7 +189,7 @@ def main():
                     dic_especiais1 = passar_especial_dic(lista_especiais1)
                     dic_especiais2 = passar_especial_dic(lista_especiais2)
                     print(f"""
-                {len(grelha[0])} de comprimento por {len(grelha)} de largura
+                {len(grelha[0])} de comprimento por {len(grelha)} de largura.
                             Jogador:
                                 {jog_jogo[0]}""")
                     for i in dic_especiais1:
@@ -209,7 +210,7 @@ def main():
                     print(' '.join(linha))
                 print('\n')
                 
-            elif opcao[0] == "CP":
+            elif opcao[0] == "CP" and len(opcao) > 1:
                 if opcao[1] == lista_jog[0]:
                     especiais = verificar_tamanho_especiais(lista_especiais1, opcao)
                 else:
@@ -319,11 +320,12 @@ def main():
                                             grelha = []
                                             jog_jogo = []
                                             
-            elif opcao[0] == "D":
-                if opcao[2] == "":
-                    if opcao[1] not in lista_jog:
+            elif opcao[0] == "D" and len(opcao) > 1:
+                if len(opcao) < 3:
+                    verificacao = verificar_jogador(lista_jog, opcao[1])
+                    if verificacao == False:
                         print(f"""
-            O jogador {opcao[1]} não está registado..""")
+            O jogador {opcao[1]} não está registado.""")
                     elif jog_jogo == []:
                         print("""
             Não existe um jogo em curso.""")
@@ -332,14 +334,18 @@ def main():
             O jogador {opcao[1]} não participa no jogo em curso.""")
                     else:
                         lista_jog = adicionar_jogos_1(lista_jog, opcao[1], jog_jogo)
-                        jog_jogo = []
                         grelha = []
+                        jog_jogo = []
+                        print(f"""
+            O jogador {opcao[1]} deistiu. Jogo terminado.""")
                         
                 else:
-                    if opcao[1] not in lista_jog:
+                    verificacao = verificar_jogador(lista_jog, opcao[1])
+                    verificacao2 = verificar_jogador(lista_jog, opcao[2])
+                    if verificacao == False:
                         print(f"""
             O jogador {opcao[1]} não está registado.""")
-                    elif opcao[2] not in lista_jog:
+                    elif verificacao2 == False:
                         print(f"""
             O jogador {opcao[2]} não está registado.""")
                     elif jog_jogo == []:
@@ -352,11 +358,13 @@ def main():
                         print(f"""
             O jogador {opcao[2]} não participa no jogo em curso.""")
                     else:
-                        lista_jog = adicionar_jogos_2(lista_jog, opcao[1], jog_jogo)
-                        lista_jog = adicionar_jogos_2(lista_jog, opcao[2], jog_jogo)
+                        lista_jog = adicionar_jogos_2(lista_jog, opcao[1])
+                        lista_jog = adicionar_jogos_2(lista_jog, opcao[2])
                         jog_jogo = []
                         grelha = []
-            elif opcao[0] == "Voltar":
+                        print(f"""
+                        Ambos os jogadores {opcao[1]} e {opcao[2]} desistiram. Jogo terminado.""")
+            elif opcao[0].lower == "voltar":
                 continue
             else:
                 print("""
@@ -372,7 +380,7 @@ def main():
                     """)
             opcao = input("""
                     Opção escolhida: """).split()
-            if opcao[0] == "L":
+            if opcao[0] == "L" and len(opcao) > 1:
                 ficheiro = ler_ficheiro_json(opcao[1])
                 if ficheiro[1] != []:
                     lista_jog = ficheiro[0]
@@ -383,13 +391,13 @@ def main():
                     lista_especiais2 = ficheiro[5]
                 else:
                     lista_jog = ficheiro[0]
-            elif opcao[0] == "G":
+            elif opcao[0] == "G" and len(opcao) > 1:
                 if jog_jogo != []:
                     listan = [n]
                     escrever_ficheiro_json(opcao[1], lista_jog, grelha, jog_jogo, listan, lista_especiais1, lista_especiais2)
                 else:
                     escrever_ficheiro_json_sgrelha(opcao[1], lista_jog)
-            elif opcao[0] == "Voltar":
+            elif  opcao[0].lower == "voltar":
                 continue
             else:
                 print("""
@@ -397,7 +405,8 @@ def main():
 
         elif opcao == "sair":
             sair = input("""
-                Tem a certeza que quer sair? """).lower()
+                Tem a certeza que quer sair? 
+                        """).lower()
             if sair == "sim":
                 guardar = input(""" 
                     Deseja guardar os ficheiros antes de sair?
