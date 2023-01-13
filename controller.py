@@ -63,7 +63,7 @@ def verificar_vitoria_vertical(grelha, w, h, n):
     
 def verificar_vitoria_diagonal_baixo(grelha, wpeca, hpeca, n, jog):
     m = 0
-    for linha in range(-wpeca, wpeca, 1):
+    for linha in range(-wpeca+1, wpeca, 1):
         if 0 <= hpeca - linha < len(grelha) and 0 <= wpeca + linha < len(grelha):
             if grelha[hpeca - linha][wpeca + linha] == jog:
                 m += 1
@@ -74,7 +74,7 @@ def verificar_vitoria_diagonal_baixo(grelha, wpeca, hpeca, n, jog):
     
 def verificar_vitoria_diagonal_cima(grelha, wpeca, hpeca, n, jog):
     r = 0
-    for linha in range(-wpeca, wpeca, 1):
+    for linha in range(-wpeca+1, wpeca, 1):
         if 0 <= hpeca + linha < len(grelha) and 0 <= wpeca + linha < len(grelha):
             if grelha[hpeca + linha][wpeca + linha] == jog:
                 r += 1
@@ -88,7 +88,7 @@ def adicionar_pecas_especiais_custom(opcao):
     lista = []
     if n > 6:
         if opcao[6] != "":
-            for i in range(6, n + 1):
+            for i in range(6, n):
                 temp = int(opcao[i])
                 lista.append(temp)
     return lista

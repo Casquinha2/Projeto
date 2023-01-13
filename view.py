@@ -125,8 +125,10 @@ def main():
                         ver_esp1 = verificar_especiais(lista_especiais1, n)
                         ver_esp2 = verificar_especiais(lista_especiais2, n)
                         if ver_esp1 == False or ver_esp2 == False:
+                            jog_jogo = []
+                            grelha= []            
                             print("""
-                Dimensão das peças especiais são inválidas.""")
+                Dimensão das peças especiais são inválidas.""")                       
                         else:
                             grelha = criar_grelha(w, h)
                             print(f"""
@@ -140,6 +142,8 @@ def main():
                         ver_esp1 = verificar_especiais(lista_especiais1, n)
                         ver_esp2 = verificar_especiais(lista_especiais2, n)
                         if ver_esp1 == False or ver_esp2 == False:
+                            jog_jogo = []
+                            grelha= []    
                             print("""
                 Dimensão das peças especiais são inválidas.""")
                         else:
@@ -155,27 +159,35 @@ def main():
                         ver_esp1 = verificar_especiais(lista_especiais1, n)
                         ver_esp2 = verificar_especiais(lista_especiais2, n)
                         if ver_esp1 == False or ver_esp2 == False:
+                            jog_jogo = []
+                            grelha= []                        
                             print("""
                 Dimensão das peças especiais são inválidas.""")
                         else:
                             grelha = criar_grelha(w, h)
                             print(f"""
                     Jogo iniciado entre {jog_jogo[0]} e {jog_jogo[1]}.""")
-                    elif len(opcao) > 5:
+                    elif len(opcao) > 6:
                         w = int(opcao[3])
                         h = int(opcao[4])
                         n = int(opcao[5])
                         lista_especiais1 = adicionar_pecas_especiais_custom(opcao)
-                        lista_especiais1 = adicionar_pecas_especiais_custom(opcao)
+                        lista_especiais2 = adicionar_pecas_especiais_custom(opcao)                       
                         ver_esp1 = verificar_especiais(lista_especiais1, n)
                         ver_esp2 = verificar_especiais(lista_especiais2, n)
                         if h < w / 2 or h > w:
+                            jog_jogo = []
+                            grelha= []
                             print(f"""
                 Dimensões de grelha invalidas.""")
                         elif n > w:
+                            jog_jogo = []
+                            grelha= []
                             print("""
                 Tamanho de sequência invalido.""")
                         elif ver_esp1 == False or ver_esp2 == False:
+                            jog_jogo = []
+                            grelha= []
                             print("""
                 Dimensão das peças especiais são inválidas.""")
                         else:
@@ -183,6 +195,8 @@ def main():
                             print(f"""
                 Jogo iniciado entre {jog_jogo[0]} e {jog_jogo[1]}.""")
                     else:
+                        jog_jogo = []
+                        grelha= [] 
                         print("""
                 Faltam dados obrigatórios para iniciar o jogo.""")
             elif opcao[0] == "DJ":
@@ -223,6 +237,8 @@ def main():
                 especiais = True
                 tamanho1 = 0
                 tamanho2 = 0
+                d = 1
+                f = 1
                 if grelha == []:
                     print("""
                 Não existe nenhum jogo em curso.""")
@@ -243,14 +259,14 @@ def main():
                         else:
                             if len(opcao) == 5:
                                 if opcao[4].lower() == "direita":
-                                    if 0 >= int(opcao[2]) + int(opcao[3]) and int(opcao[2]) + int(opcao[3]) >= len(grelha) + 1:
+                                    if 0 >= int(opcao[2]) + int(opcao[3]) and int(opcao[2]) + int(opcao[3]) >= len(grelha[0])+1:
                                         print("""
                 Posição irregular.""")
                                     else:
                                         d = int(opcao[2])
                                         f = 1
                                 elif opcao[4].lower() == "esquerda":
-                                    if 0 >= int(opcao[2]) - int(opcao[3]) and int(opcao[2]) - int(opcao[3]) >= len(grelha) + 1:
+                                    if 0 >= int(opcao[2]) - int(opcao[3]) and int(opcao[2]) - int(opcao[3]) >= len(grelha[0])+1:
                                         print("""
                 Posição irregular.""")
                                     else:
@@ -259,10 +275,6 @@ def main():
                                 else:
                                     print("""
                 Sentido inválido.""")
-                            else:
-                                d = 1
-                                f = 1
-
                             for i in range(0, d, f):
                                 if opcao[1] == jog_jogo[0]:
                                     wpeca = int(opcao[3]) - 1 + i
@@ -333,7 +345,9 @@ def main():
                                                 jog_jogo = []
                                                     
                                             else:
+                                                print("1")
                                                 vitoria = verificar_vitoria_diagonal_baixo(grelha, wpeca, hpeca, n, "O")
+                                                print("3")
                                                 if vitoria == True:
                                                     print(f"""
                     O jogador {opcao[1]} ganhou!""")
