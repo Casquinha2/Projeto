@@ -27,13 +27,15 @@ def bubble_sort(lista):
 
 
 def colocar_peca(peca, grelha, h, jog):
-    for i in range(h-1, 0, -1):
-        if grelha[i][peca] != "_":   
+    for i in range(h - 1, -1, -1):
+        if grelha[i][peca] != "_":
+            validacao = False   
             continue
         else:
             grelha[i][peca] = jog
+            validacao = True
             break
-    return grelha, i
+    return validacao, grelha, i
 
 def verificar_vitoria_horizontal(grelha, w, h, n):
     m = 0

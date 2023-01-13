@@ -205,16 +205,24 @@ def main():
                         print(f"""
                         Peças especiais de {i} : {j}""")
             elif opcao[0] == "V":
-                print("\n")
-                for linha in grelha:
-                    print(' '.join(linha))
-                print('\n')
-                
-            elif opcao[0] == "CP" and len(opcao) > 1:
-                if opcao[1] == lista_jog[0]:
-                    especiais = verificar_tamanho_especiais(lista_especiais1, opcao)
+                if grelha == []:
+                    print("""
+                Não existe jogo em curso.""")
                 else:
-                    especiais = verificar_tamanho_especiais(lista_especiais2, opcao)
+                    print("\n")
+                    for linha in grelha:
+                        print(' '.join(linha))
+                    print('\n')
+
+                    
+            elif opcao[0] == "CP" and len(opcao) > 1:
+                especiais = True
+                if opcao[1] == lista_jog[0]:
+                    if int(opcao[2]) != 1:
+                        especiais = verificar_tamanho_especiais(lista_especiais1, opcao)
+                else:
+                    if int(opcao[2]) != 1:
+                        especiais = verificar_tamanho_especiais(lista_especiais2, opcao)
                 
                 if grelha == []:
                     print("""
@@ -225,85 +233,92 @@ def main():
                 elif especiais == False:
                     print("""
                 Tamanho de peça não disponivel.""")
-                elif opcao[4].lower == "direita":
-                    if 0 >= opcao[2] + opcao[3] and opcao[2] + opcao[3] >= len(grelha) + 1:
-                        print("""
-                Posição irregular.""")
-                elif opcao[4].lower == "esquerda":
-                    if 0 >= opcao[2] - opcao[3] and opcao[2] - opcao[3] >= len(grelha) + 1:
-                        print("""
-                Posição irregular.""")
                 else:
-                    if opcao[4].lower == "direita":
-                        d = opcao[2]
-                        f = 1
-                    elif opcao[4].lower == "esquerda":
-                        d = -opcao[2]
-                        f = -1
-                    else:
-                        print("""
+                    if len(opcao) > 4:
+                        if opcao[4].lower == "direita":
+                            if 0 >= opcao[2] + opcao[3] and opcao[2] + opcao[3] >= len(grelha) + 1:
+                                print("""
+                Posição irregular.""")
+                        elif opcao[4].lower == "esquerda":
+                            if 0 >= opcao[2] - opcao[3] and opcao[2] - opcao[3] >= len(grelha) + 1:
+                                print("""
+                Posição irregular.""")
+                        else:
+                            if opcao[4].lower == "direita":
+                                d = opcao[2]
+                                f = 1
+                            elif opcao[4].lower == "esquerda":
+                                d = -opcao[2]
+                                f = -1
+                            else:
+                                print("""
                 Sentido inválido.""")
+                    else:
+                        d = 1
+                        f = 1
                     for i in range(0, d, f):
                         if opcao[1] == jog_jogo[0]:
                             wpeca = int(opcao[3]) - 1 + i
-                            grelha, hpeca = colocar_peca(wpeca , grelha, len(grelha), "X")
-                            vitoria = verificar_vitoria_horizontal(grelha, len(grelha[0]), len(grelha), n)
-                            if vitoria == True:
-                                print(f"""
-                    O jogador {opcao[1]} ganhou!""")
-                                lista_jog = adicionar_jogos_1(lista_jog, opcao[1], jog_jogo)
-                                grelha = []
-                                jog_jogo = []
-                                
+                            valido ,grelha, hpeca = colocar_peca(wpeca , grelha, len(grelha), "X")
+                            if valido == False:
+                                print("""
+                Posição irregular.""")
                             else:
-                                vitoria = verificar_vitoria_vertical(grelha, len(grelha[0]), len(grelha), n)
+                                vitoria = verificar_vitoria_horizontal(grelha, len(grelha[0]), len(grelha), n)
                                 if vitoria == True:
                                     print(f"""
                     O jogador {opcao[1]} ganhou!""")
                                     lista_jog = adicionar_jogos_1(lista_jog, opcao[1], jog_jogo)
                                     grelha = []
                                     jog_jogo = []
-                                    
+                                        
                                 else:
-                                    vitoria = verificar_vitoria_diagonal_baixo(grelha, wpeca, hpeca, n, "X")
+                                    vitoria = verificar_vitoria_vertical(grelha, len(grelha[0]), len(grelha), n)
                                     if vitoria == True:
                                         print(f"""
                     O jogador {opcao[1]} ganhou!""")
                                         lista_jog = adicionar_jogos_1(lista_jog, opcao[1], jog_jogo)
                                         grelha = []
                                         jog_jogo = []
-                                        
-                                    else:
-                                        vitoria = verificar_vitoria_diagonal_cima(grelha, wpeca, hpeca, n, "X")                    
-                                        if vitoria == True:
-                                            print(f"""
-                    O jogador {opcao[1]} ganhou!""")
-                                            lista_jog = adicionar_jogos_1(lista_jog, opcao[1], jog_jogo)
-                                            grelha = []
-                                            jog_jogo = []
                                             
-                        elif opcao[1] == jog_jogo[1]:
-                            wpeca = int(opcao[3]) - 1
-                            grelha, hpeca = colocar_peca(wpeca , grelha, len(grelha), "O")
-                            vitoria = verificar_vitoria_horizontal(grelha, len(grelha[0]), len(grelha), n)
-                            if vitoria == True:
-                                print(f"""
+                                    else:
+                                        vitoria = verificar_vitoria_diagonal_baixo(grelha, wpeca, hpeca, n, "X")
+                                        if vitoria == True:
+                                            print(f"""
                     O jogador {opcao[1]} ganhou!""")
-                                lista_jog = adicionar_jogos_1(lista_jog, opcao[1], jog_jogo)
-                                grelha = []
-                                jog_jogo = []
-                                
+                                            lista_jog = adicionar_jogos_1(lista_jog, opcao[1], jog_jogo)
+                                            grelha = []
+                                            jog_jogo = []
+                                                
+                                        else:
+                                            vitoria = verificar_vitoria_diagonal_cima(grelha, wpeca, hpeca, n, "X")                    
+                                            if vitoria == True:
+                                                print(f"""
+                    O jogador {opcao[1]} ganhou!""")
+                                                lista_jog = adicionar_jogos_1(lista_jog, opcao[1], jog_jogo)
+                                                grelha = []
+                                                jog_jogo = []
+                                            else:
+                                                print("""
+                    Peça colocada""")
+                                                
+                        else:
+                            wpeca = int(opcao[3]) - 1
+                            valido, grelha, hpeca = colocar_peca(wpeca , grelha, len(grelha), "O")
+                            if valido == False:
+                                print("""
+                Posição irregular.""")
                             else:
-                                vitoria = verificar_vitoria_vertical(grelha, len(grelha[0]), len(grelha), n)
+                                vitoria = verificar_vitoria_horizontal(grelha, len(grelha[0]), len(grelha), n)
                                 if vitoria == True:
                                     print(f"""
                     O jogador {opcao[1]} ganhou!""")
                                     lista_jog = adicionar_jogos_1(lista_jog, opcao[1], jog_jogo)
                                     grelha = []
                                     jog_jogo = []
-                                    
+                                        
                                 else:
-                                    vitoria = verificar_vitoria_diagonal_baixo(grelha, wpeca, hpeca, n, "O")
+                                    vitoria = verificar_vitoria_vertical(grelha, len(grelha[0]), len(grelha), n)
                                     if vitoria == True:
                                         print(f"""
                     O jogador {opcao[1]} ganhou!""")
@@ -312,13 +327,25 @@ def main():
                                         jog_jogo = []
                                         
                                     else:
-                                        vitoria = verificar_vitoria_diagonal_cima(grelha, wpeca, hpeca, n, "O")                   
+                                        vitoria = verificar_vitoria_diagonal_baixo(grelha, wpeca, hpeca, n, "O")
                                         if vitoria == True:
                                             print(f"""
                     O jogador {opcao[1]} ganhou!""")
                                             lista_jog = adicionar_jogos_1(lista_jog, opcao[1], jog_jogo)
                                             grelha = []
                                             jog_jogo = []
+                                                
+                                        else:
+                                            vitoria = verificar_vitoria_diagonal_cima(grelha, wpeca, hpeca, n, "O")                   
+                                            if vitoria == True:
+                                                print(f"""
+                    O jogador {opcao[1]} ganhou!""")
+                                                lista_jog = adicionar_jogos_1(lista_jog, opcao[1], jog_jogo)
+                                                grelha = []
+                                                jog_jogo = []
+                                            else:
+                                                print("""
+                    Peça colocada""")
                                             
             elif opcao[0] == "D" and len(opcao) > 1:
                 if len(opcao) < 3:
