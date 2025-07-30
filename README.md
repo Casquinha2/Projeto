@@ -8,7 +8,7 @@ Quando o utilizador abre o jogo, este deve de adicionar na lista de jogadores o 
 É possível ver jogos que estão a decorrer, ver os resultados, adicionar peças no tabuleiro e desistir do jogo.
 
 ## Linguagens usadas no projeto
-- Python - usada para o código
+- Python - usada para o código.
 
 Este jogo é jogável pelo terminal.   
 Neste projeto, existe erros na verificação das peças na diagonal para descobrir se existem as n em linha.
